@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Costa, W.G. et al. 2022" />
+
+
+<title>Article: Genetic diversity and interaction between the maintainers of commercial Soybean cultivars using self-organizing maps</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Article: Genetic diversity and interaction
+between the maintainers of commercial Soybean cultivars using
+self-organizing maps</h1>
+<h4 class="author">Costa, W.G. et al. 2022</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2022-06-20
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong>
+<code>Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self/</code>
+<span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220620code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220620)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220620code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220620)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaGeneticdiversityandinteractionbetweenthemaintainersofcommercialSoybeancultivarsusingselftree2b46fdae6490cf723bef1daca97b1980a02e23bdtargetblank2b46fdaa">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/WevertonGomesCosta/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self/tree/2b46fdae6490cf723bef1daca97b1980a02e23bd" target="_blank">2b46fda</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaGeneticdiversityandinteractionbetweenthemaintainersofcommercialSoybeancultivarsusingselftree2b46fdae6490cf723bef1daca97b1980a02e23bdtargetblank2b46fdaa"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/WevertonGomesCosta/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self/tree/2b46fdae6490cf723bef1daca97b1980a02e23bd" target="_blank">2b46fda</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  Contagem_Tipo_Crescimento_por_Ano.tiff
+    Untracked:  analysis/figure/
+    Untracked:  brilhodasemente.tiff
+    Untracked:  cordapubescencia.tiff
+    Untracked:  cordohilo.tiff
+    Untracked:  cordolegume.tiff
+    Untracked:  data/data.xlsx
+    Untracked:  data/yield.xlsx
+    Untracked:  evento.tiff
+    Untracked:  formadasemente.tiff
+    Untracked:  gruposmantenedores.tiff
+    Untracked:  hipocotilo.tiff
+    Untracked:  tipodecrescimento.tiff
+
+Unstaged changes:
+    Modified:   analysis/index.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML
+(<code>docs/index.html</code>) files. If you’ve configured a remote Git
+repository (see <code>?wflow_git_remote</code>), click on the hyperlinks
+in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/WevertonGomesCosta/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self/blob/2b46fdae6490cf723bef1daca97b1980a02e23bd/analysis/index.Rmd" target="_blank">2b46fda</a>
+</td>
+<td>
+WevertonGomesCosta
+</td>
+<td>
+2022-06-20
+</td>
+<td>
+Start workflowr project.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="loading-libraries" class="section level1">
+<h1>Loading Libraries</h1>
+<pre class="r"><code>library(&quot;FactoMineR&quot;)
+library(&quot;factoextra&quot;) #Correspondence Analysis
+library(readxl) #Read data files in xlsx
+library(randomForest) #Random Forest
+library(tidyverse)
+require(magrittr)
+require(reshape2)
+library(ggforce) #Data and graphics manipulation
+library(&quot;kohonen&quot;) #Kohonen SOM
+library(RColorBrewer) #Color palette
+require(&quot;ggrepel&quot;)
+library(gridExtra) #Graphs of Kohonen Analysis</code></pre>
+<div id="defining-colors" class="section level2">
+<h2>Defining colors</h2>
+<pre class="r"><code>qual_col_pals = brewer.pal.info[brewer.pal.info$category == &#39;qual&#39;, ]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))</code></pre>
+</div>
+</div>
+<div id="reading-the-data" class="section level1">
+<h1>Reading the data</h1>
+<pre class="r"><code>data &lt;- read_excel(&quot;data/data.xlsx&quot;)</code></pre>
+<div id="data-cleaning" class="section level2">
+<h2>Data cleaning</h2>
+<pre class="r"><code>lower5 &lt;-   data %&gt;%
+  group_by(Maintainer_coded) %&gt;%
+  count() %&gt;%
+  filter(n &lt;= 5)
+
+data &lt;- data[!data$Maintainer_coded %in%
+               lower5$Maintainer_coded,]</code></pre>
+</div>
+<div id="transforming-variables-into-factors" class="section level2">
+<h2>Transforming variables into factors</h2>
+<pre class="r"><code>for (i in 1:ncol(data)) {
+  data[[i]] = as.factor(data[[i]])
+}</code></pre>
+</div>
+</div>
+<div id="traits-importance---random-forest" class="section level1">
+<h1>Traits Importance - Random Forest</h1>
+<div id="data-manipulation" class="section level2">
+<h2>Data manipulation</h2>
+<pre class="r"><code>data = data[, -c(1, 2, 5)] #Excluding Name, Maintainer and Year variables</code></pre>
+</div>
+<div id="processing" class="section level2">
+<h2>Processing</h2>
+<pre class="r"><code>ntraits &lt;- (ncol(data) - 1) / 3 #Number of traits divided by 3
+ntree &lt;- 500 #Number of trees
+
+rf1 &lt;- randomForest(
+  data$Maintainer_coded ~ .,
+  data = data,
+  mtry = ntraits,
+  importance = TRUE,
+  proximity = TRUE,
+  ntree = ntree,
+  na.action = na.roughfix
+)</code></pre>
+</div>
+<div id="importance-of-traits-based-on-accuracy-index-and-gine-index"
+class="section level2">
+<h2>Importance of traits based on accuracy index and Gine index</h2>
+<pre class="r"><code>imp &lt;- as.data.frame(varImpPlot(rf1))</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>imp$traitnames &lt;- rownames(imp)
+imp_trait &lt;- melt(imp, id.var = &quot;traitnames&quot;)
+imp_trait$traitnames &lt;- as.factor(imp_trait$traitnames)
+levels(imp_trait$traitnames) &lt;- c(
+  &quot;Event Type&quot;,
+  &quot;Flower Color&quot;,
+  &quot;Growth Type&quot;,
+  &quot;Hilo Color&quot;,
+  &quot;Hypocotyl&quot;,
+  &quot;Legum Color&quot;,
+  &quot;Peroxidase Reaction&quot;,
+  &quot;Pubescence Color&quot;,
+  &quot;Pubescence Density&quot;,
+  &quot;Seed Brightness&quot;,
+  &quot;Seed Shape&quot;,
+  &quot;Tegument Color&quot;
+)</code></pre>
+<div id="plot-importance-of-traits" class="section level3">
+<h3>Plot importance of traits</h3>
+<pre class="r"><code>imp_trait %&gt;%
+  mutate(traitnames = fct_reorder(traitnames, value)) %&gt;%
+  ggplot(aes(x = traitnames, y = value)) +
+  geom_point(aes(colour = variable, shape = variable), size = 4) +
+  scale_colour_discrete(labels = c(&quot;Accuracy&quot;, &quot;Gini Indice&quot;)) +
+  scale_shape_discrete(labels = c(&quot;Accuracy&quot;, &quot;Gini Indice&quot;)) +
+  geom_segment(aes(
+    x = traitnames,
+    xend = traitnames,
+    y = 0,
+    yend = value
+  )) +
+  ylab(&quot;Increase in node purity&quot;) +
+  xlab(&quot;&quot;) +
+  theme_minimal() +
+  theme(
+    legend.position = c(0.8, 0.15),
+    legend.title = element_blank(),
+    legend.background = element_rect(fill = &quot;white&quot;, colour = &quot;black&quot;),
+    legend.key.size = unit(0.5, &quot;cm&quot;),
+    axis.text.y = element_text(
+      angle = 15,
+      vjust = 0.5,
+      hjust = 1
+    )
+  ) +
+  coord_flip()</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="excluding-the-4-least-important-traits-by-rf"
+class="section level2">
+<h2>Excluding the 4 least important traits by RF</h2>
+<pre class="r"><code>x &lt;- imp_trait %&gt;% group_by(traitnames) %&gt;%
+  summarise(value = mean(value)) %&gt;%
+  slice_min(value, n = 4, with_ties = FALSE) %&gt;%
+  ungroup()
+
+colnames(data) &lt;- c(
+  &quot;Maintainer_coded&quot;,
+  &quot;Event Type&quot;,
+  &quot;Flower Color&quot;,
+  &quot;Legum Color&quot;,
+  &quot;Seed Shape&quot;,
+  &quot;Tegument Color&quot;,
+  &quot;Hypocotyl&quot;,
+  &quot;Pubescence Color&quot;,
+  &quot;Pubescence Density&quot;,
+  &quot;Hilo Color&quot;,
+  &quot;Peroxidase Reaction&quot;,
+  &quot;Growth Type&quot;,
+  &quot;Seed Brightness&quot;
+)
+
+data &lt;-
+  data  %&gt;% select(!any_of(x$traitnames)) #tegument color, flower color, peroxidase reaction, and peroxidase</code></pre>
+</div>
+</div>
+<div id="multiple-correspondence-analysis" class="section level1">
+<h1>Multiple Correspondence Analysis</h1>
+<pre class="r"><code>res.mca &lt;- MCA(data,
+               quali.sup = 1,
+               graph = FALSE,
+               ncp = 54)</code></pre>
+<div id="eigenvalues" class="section level2">
+<h2>Eigenvalues</h2>
+<pre class="r"><code>eig.val &lt;- get_eigenvalue(res.mca)
+eig.val</code></pre>
+<pre><code>        eigenvalue variance.percent cumulative.variance.percent
+Dim.1  0.402480476       5.96267372                    5.962674
+Dim.2  0.284778036       4.21893386                   10.181608
+Dim.3  0.270253673       4.00375812                   14.185366
+Dim.4  0.203433768       3.01383360                   17.199199
+Dim.5  0.187328114       2.77523131                   19.974431
+Dim.6  0.184031980       2.72639971                   22.700830
+Dim.7  0.167652926       2.48374705                   25.184577
+Dim.8  0.162517355       2.40766453                   27.592242
+Dim.9  0.152768789       2.26324131                   29.855483
+Dim.10 0.151812314       2.24907132                   32.104555
+Dim.11 0.148000840       2.19260504                   34.297160
+Dim.12 0.144838569       2.14575658                   36.442916
+Dim.13 0.143065848       2.11949404                   38.562410
+Dim.14 0.140373737       2.07961091                   40.642021
+Dim.15 0.139461100       2.06609037                   42.708111
+Dim.16 0.136846878       2.02736115                   44.735473
+Dim.17 0.134072117       1.98625359                   46.721726
+Dim.18 0.131163553       1.94316375                   48.664890
+Dim.19 0.128359156       1.90161712                   50.566507
+Dim.20 0.127350293       1.88667100                   52.453178
+Dim.21 0.126977040       1.88114133                   54.334319
+Dim.22 0.125921907       1.86550973                   56.199829
+Dim.23 0.125356705       1.85713638                   58.056966
+Dim.24 0.125303122       1.85634254                   59.913308
+Dim.25 0.124671194       1.84698065                   61.760289
+Dim.26 0.123799723       1.83406997                   63.594359
+Dim.27 0.122764633       1.81873531                   65.413094
+Dim.28 0.121421046       1.79883032                   67.211924
+Dim.29 0.120260820       1.78164178                   68.993566
+Dim.30 0.117533062       1.74123054                   70.734797
+Dim.31 0.115027236       1.70410720                   72.438904
+Dim.32 0.114202013       1.69188168                   74.130785
+Dim.33 0.111507893       1.65196878                   75.782754
+Dim.34 0.109699995       1.62518511                   77.407939
+Dim.35 0.108166876       1.60247224                   79.010412
+Dim.36 0.106518586       1.57805313                   80.588465
+Dim.37 0.105464112       1.56243129                   82.150896
+Dim.38 0.101919534       1.50991903                   83.660815
+Dim.39 0.099461844       1.47350881                   85.134324
+Dim.40 0.097671687       1.44698795                   86.581312
+Dim.41 0.094878115       1.40560170                   87.986914
+Dim.42 0.093241012       1.38134833                   89.368262
+Dim.43 0.088330043       1.30859323                   90.676855
+Dim.44 0.082579662       1.22340241                   91.900257
+Dim.45 0.078630285       1.16489312                   93.065151
+Dim.46 0.074562314       1.10462688                   94.169777
+Dim.47 0.071196443       1.05476212                   95.224540
+Dim.48 0.065856898       0.97565775                   96.200197
+Dim.49 0.063338828       0.93835301                   97.138550
+Dim.50 0.056963360       0.84390163                   97.982452
+Dim.51 0.054646507       0.80957788                   98.792030
+Dim.52 0.052252523       0.77411146                   99.566141
+Dim.53 0.025303341       0.37486431                   99.941006
+Dim.54 0.003982118       0.05899435                  100.000000</code></pre>
+<pre class="r"><code>eig.val &lt;-
+  as.data.frame(eig.val) #creating data frame with eigenvalues
+eig.val$Dimension &lt;-
+  as.numeric(str_replace(rownames(eig.val), &quot;Dim.&quot;, &quot;&quot;))</code></pre>
+</div>
+<div
+id="graph-of-the-percentage-of-explanation-of-the-variance-accumulated-by-the-dimensions"
+class="section level2">
+<h2>Graph of the percentage of explanation of the variance accumulated
+by the dimensions</h2>
+<pre class="r"><code>ggplot(data = eig.val, aes(x = Dimension, y = (cumulative.variance.percent))) +
+  geom_bar(stat = &quot;identity&quot;, fill = &quot;#00AFBB&quot;, alpha = 0.5) +
+  geom_point(colour = &quot;#FC4E07&quot;) +
+  geom_line(colour = &quot;#FC4E07&quot;) +
+  scale_x_continuous(breaks = c(1:nrow(eig.val)), expand = c(0.01, 0)) +
+  scale_y_continuous(expand = expansion(mult = c(0, .05))) +
+  theme_bw() +
+  labs(x = &quot;Dimensions&quot;,
+       y = &quot;Cumulative variance percent&quot;)</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="grouping-and-organizing-via-kohonens-self-organizing-maps"
+class="section level1">
+<h1>Grouping and organizing via Kohonen’s self-organizing maps</h1>
+<pre class="r"><code># Network topology and parameters
+map_dimension = 4
+
+n_iterations = 2000
+
+recalculate_map = T
+
+recalculate_no_clusters = T
+
+#Kohonen SOM
+som_grid = kohonen::somgrid(
+  xdim = map_dimension,
+  ydim = map_dimension,
+  topo = &quot;hexagonal&quot;,
+  toroidal = FALSE
+)
+
+b &lt;- res.mca[[&quot;quali.sup&quot;]][[&quot;coord&quot;]] #COORDINATES OF THE MAINTAINERS IN THE 54 DIMENSIONS</code></pre>
+<div id="processing-1" class="section level2">
+<h2>Processing</h2>
+<pre class="r"><code>set.seed(123)                                      #Seed for reproduction of results
+
+m = kohonen::supersom(
+  scale(b),
+  grid = som_grid,
+  rlen = n_iterations,
+  alpha = c(0.05, 0.01),
+  dist.fcts = &#39;euclidean&#39;
+)</code></pre>
+</div>
+<div id="interaction-graph" class="section level2">
+<h2>Interaction Graph</h2>
+<pre class="r"><code>progress &lt;- as.data.frame(cbind(m$changes, 1:nrow(m$changes)))
+colnames(progress) &lt;- c(&quot;Mean distance to closest unit&quot;, &quot;Iteration&quot;)
+
+ggplot(progress, aes(Iteration, progress[[1]])) +
+  geom_line(color = &quot;#00AFBB&quot;, size = 1) +
+  stat_smooth(color = &quot;#FC4E07&quot;,
+              fill = &quot;#FC4E07&quot;,
+              method = &quot;loess&quot;) +
+  theme_minimal() +
+  labs(y = colnames(progress[1]))</code></pre>
+<pre><code>Warning: Use of `progress[[1]]` is discouraged. Use `.data[[1]]` instead.
+Use of `progress[[1]]` is discouraged. Use `.data[[1]]` instead.</code></pre>
+<pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="trait-frequency" class="section level2">
+<h2>Trait Frequency</h2>
+<pre class="r"><code>grouping &lt;- as_tibble(cbind(m$unit.classif, rownames(b)))</code></pre>
+<pre><code>Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
+Using compatibility `.name_repair`.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<pre class="r"><code>colnames(grouping) &lt;- c(&quot;group&quot;, &quot;Maintainer_coded&quot;)
+grouping$group &lt;- as.factor(grouping$group)
+grouping$Maintainer_coded &lt;- as.factor(grouping$Maintainer_coded)
+data &lt;- data %&gt;% left_join(grouping)</code></pre>
+<pre><code>Joining, by = &quot;Maintainer_coded&quot;</code></pre>
+</div>
+<div id="distance-graph-between-neighboring-neurons"
+class="section level2">
+<h2>Distance graph between neighboring neurons</h2>
+<pre class="r"><code>som_coord &lt;- m[[4]]$pts %&gt;%
+  as_tibble %&gt;%
+  mutate(group = as.integer(row_number()))
+
+som_pts &lt;- tibble(group = as.integer(m[[2]]),
+                  dist = m[[3]])
+
+ndist &lt;- unit.distances(m$grid)
+cddist &lt;- as.matrix(object.distances(m, type = &quot;codes&quot;))
+cddist[abs(ndist - 1) &gt; .001] &lt;- NA
+neigh.dists &lt;- colMeans(cddist, na.rm = TRUE)
+som_coord &lt;- som_coord %&gt;% mutate(dist = neigh.dists)
+
+neigdists &lt;- som_coord %&gt;%
+  ggplot(aes(x0 = x, y0 = y)) +
+  geom_regon(aes(
+    r = 0.5,
+    angle = 11,
+    sides = 6,
+    fill = dist
+  ),
+  expand = unit(0.1, &#39;cm&#39;)) +
+  scale_fill_gradient(low = &quot;red&quot;, high = &quot;yellow&quot;, name = &quot;Distance&quot;) +
+  theme(
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    legend.position = &quot;bottom&quot;
+  ) +
+  geom_text_repel(
+    data = som_coord,
+    aes(x = x, y = y, label = group),
+    hjust        = 0.5,
+    force = 0,
+    color = &quot;black&quot;,
+    show.legend = FALSE,
+    segment.color = NA
+  )
+
+neigdists</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graph-distribution-of-maintainers-in-clusters"
+class="section level2">
+<h2>Graph distribution of maintainers in clusters</h2>
+<pre class="r"><code>p &lt;- som_coord %&gt;%
+  ggplot(aes(x0 = x, y0 = y)) +
+  geom_regon(aes(
+    r = 0.5,
+    angle = 11,
+    sides = 6,
+    fill = factor(group)
+  ),
+  expand = unit(0.1, &#39;cm&#39;)) +
+  theme(
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    legend.position = &quot;none&quot;
+  ) +
+  scale_fill_manual(values = col_vector[40:56])
+
+plotdata &lt;- data %&gt;%
+  group_by(group, Maintainer_coded) %&gt;%
+  summarize(n = n()) %&gt;%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %&gt;%
+  ungroup()</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;group&#39;. You can override using the
+`.groups` argument.</code></pre>
+<pre class="r"><code>plotdata$group &lt;- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata &lt;- plotdata %&gt;% left_join(som_coord, by = &quot;group&quot;)
+plotdata &lt;- na.omit(plotdata)
+
+MC &lt;- p +
+  geom_label_repel(
+    data = plotdata,
+    aes(x = x, y = y, label = Maintainer_coded),
+    max.overlaps = Inf,
+    box.padding = 0.1,
+    hjust        = 0.5,
+    direction    = &quot;y&quot;,
+    color = &quot;black&quot;,
+    show.legend = FALSE,
+    segment.color = NA
+  ) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = &quot;black&quot;,
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank())
+MC</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="graphs-distribution-of-the-categories-of-traits-by-cluster"
+class="section level2">
+<h2>Graphs Distribution of the categories of traits by cluster</h2>
+<pre class="r"><code>p &lt;- som_coord %&gt;%
+  ggplot(aes(x0 = x, y0 = y)) +
+  geom_regon(
+    aes(r = 0.5, angle = 11, sides = 6),
+    expand = unit(0.1, &#39;cm&#39;),
+    alpha = 0,
+    color = &quot;black&quot;
+  ) +
+  theme(
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    legend.position = &quot;bottom&quot;
+  )
+
+plotdata &lt;- data %&gt;%
+  group_by(group, `Event Type`) %&gt;%
+  summarize(n = n()) %&gt;%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %&gt;%
+  ungroup()</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;group&#39;. You can override using the
+`.groups` argument.</code></pre>
+<pre class="r"><code>plotdata$group &lt;- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata &lt;- plotdata %&gt;% left_join(som_coord, by = &quot;group&quot;)
+plotdata &lt;- na.omit(plotdata)
+levels(plotdata$`Event Type`) &lt;-
+  c(
+    &quot;Conventional&quot;,
+    &quot;CV127&quot;,
+    &quot;Intacta™ Roundup Ready™ 2 Pro&quot;,
+    &quot;Liberty Link&quot;,
+    &quot;Roundup Ready&quot;
+  )
+
+EV &lt;- p +
+  geom_arc_bar(
+    data = plotdata,
+    aes(
+      x0 = x,
+      y0 = y,
+      r0 = 0,
+      r = 0.4,
+      amount = n,
+      fill = `Event Type`
+    ),
+    stat = &#39;pie&#39;,
+    alpha = 0.8
+  ) +
+  scale_fill_manual(values = col_vector[1:5]) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = &quot;black&quot;,
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank(), legend.title = element_blank())
+EV</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotdata &lt;- data %&gt;%
+  group_by(group, `Legum Color`) %&gt;%
+  summarize(n = n()) %&gt;%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %&gt;%
+  ungroup()</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;group&#39;. You can override using the
+`.groups` argument.</code></pre>
+<pre class="r"><code>plotdata$group &lt;- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata &lt;- plotdata %&gt;% left_join(som_coord, by = &quot;group&quot;)
+plotdata &lt;- na.omit(plotdata)
+levels(plotdata$`Legum Color`) &lt;-
+  c(
+    &quot;Brown&quot;,
+    &quot;Clear&quot;,
+    &quot;Dark Brown&quot;,
+    &quot;Dark Gray&quot;,
+    &quot;Gray&quot;,
+    &quot;Light Brown&quot;,
+    &quot;Light Gray&quot;,
+    &quot;Medium Brown&quot;
+  )
+
+CL &lt;- p +
+  geom_arc_bar(
+    data = plotdata,
+    aes(
+      x0 = x,
+      y0 = y,
+      r0 = 0,
+      r = 0.4,
+      amount = n,
+      fill = `Legum Color`
+    ),
+    stat = &#39;pie&#39;,
+    alpha = 0.8
+  ) +
+  scale_fill_manual(values = col_vector[6:13]) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = &quot;black&quot;,
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank(), legend.title = element_blank())
+CL</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-20-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotdata &lt;- data %&gt;%
+  group_by(group, `Seed Shape`) %&gt;%
+  summarize(n = n()) %&gt;%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %&gt;%
+  ungroup()</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;group&#39;. You can override using the
+`.groups` argument.</code></pre>
+<pre class="r"><code>plotdata$group &lt;- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata &lt;- plotdata %&gt;% left_join(som_coord, by = &quot;group&quot;)
+plotdata &lt;- na.omit(plotdata)
+levels(plotdata$`Seed Shape`) &lt;- c(
+  &quot;Elongated flat&quot;,
+  &quot;Elongated spherical&quot;,
+  &quot;Spherical flat&quot;,
+  &quot;Ovulated spherical&quot;,
+  &quot;Round&quot;,
+  &quot;Rounded&quot;,
+  &quot;Spherical&quot;,
+  &quot;Elongated&quot;
+)
+
+FS &lt;- p +
+  geom_arc_bar(
+    data = plotdata,
+    aes(
+      x0 = x,
+      y0 = y,
+      r0 = 0,
+      r = 0.4,
+      amount = n,
+      fill = `Seed Shape`
+    ),
+    stat = &#39;pie&#39;,
+    alpha = 0.8
+  ) +
+  scale_fill_manual(values = col_vector[14:21]) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = &quot;black&quot;,
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank(), legend.title = element_blank())
+FS</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-20-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotdata &lt;- data %&gt;%
+  group_by(group, Hypocotyl) %&gt;%
+  summarize(n = n()) %&gt;%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %&gt;%
+  ungroup()</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;group&#39;. You can override using the
+`.groups` argument.</code></pre>
+<pre class="r"><code>plotdata$group &lt;- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata &lt;- plotdata %&gt;% left_join(som_coord, by = &quot;group&quot;)
+plotdata &lt;- na.omit(plotdata)
+levels(plotdata$Hypocotyl) &lt;- c(
+  &quot;Ausente&quot;,
+  &quot;Ausente/green&quot;,
+  &quot;Presente&quot;,
+  &quot;Presente/green&quot;,
+  &quot;Presente/white&quot;,
+  &quot;Presente/bronze&quot; ,
+  &quot;Presente/purple&quot;
+)
+
+HI &lt;- p +
+  geom_arc_bar(
+    data = plotdata,
+    aes(
+      x0 = x,
+      y0 = y,
+      r0 = 0,
+      r = 0.4,
+      amount = n,
+      fill = Hypocotyl
+    ),
+    stat = &#39;pie&#39;,
+    alpha = 0.8
+  ) +
+  scale_fill_manual(values = col_vector[22:28]) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = &quot;black&quot;,
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank(), legend.title = element_blank())
+HI</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-20-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotdata &lt;- data %&gt;%
+  group_by(group, `Pubescence Color`) %&gt;%
+  summarize(n = n()) %&gt;%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %&gt;%
+  ungroup()</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;group&#39;. You can override using the
+`.groups` argument.</code></pre>
+<pre class="r"><code>plotdata$group &lt;- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata &lt;- plotdata %&gt;% left_join(som_coord, by = &quot;group&quot;)
+plotdata &lt;- na.omit(plotdata)
+levels(plotdata$`Pubescence Color`) &lt;-
+  c(&quot;Average&quot;,
+    &quot;Brown&quot;,
+    &quot;Dark Brown&quot;,
+    &quot;Gray&quot;,
+    &quot;Light Brown&quot;,
+    &quot;Light Gray&quot;,
+    &quot;Medium Brown&quot;)
+
+CP &lt;- p +
+  geom_arc_bar(
+    data = plotdata,
+    aes(
+      x0 = x,
+      y0 = y,
+      r0 = 0,
+      r = 0.4,
+      amount = n,
+      fill = `Pubescence Color`
+    ),
+    stat = &#39;pie&#39;,
+    alpha = 0.8
+  ) +
+  scale_fill_manual(values = col_vector[29:35]) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = &quot;black&quot;,
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank(), legend.title = element_blank())
+CP</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-20-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotdata &lt;- data %&gt;%
+  group_by(group, `Hilo Color`) %&gt;%
+  summarize(n = n()) %&gt;%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %&gt;%
+  ungroup()</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;group&#39;. You can override using the
+`.groups` argument.</code></pre>
+<pre class="r"><code>plotdata$group &lt;- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata &lt;- plotdata %&gt;% left_join(som_coord, by = &quot;group&quot;)
+plotdata &lt;- na.omit(plotdata)
+levels(plotdata$`Hilo Color`) &lt;-
+  c(
+    &quot;Black&quot;,
+    &quot;Brown&quot;,
+    &quot;Dark Brown&quot;,
+    &quot;Faded Black&quot;,
+    &quot;Gray&quot;,
+    &quot;Imperfect Black&quot;,
+    &quot;Light Brown&quot;,
+    &quot;Medium Brown&quot;,
+    &quot;Yellow&quot;
+  )
+
+CH &lt;- p +
+  geom_arc_bar(
+    data = plotdata,
+    aes(
+      x0 = x,
+      y0 = y,
+      r0 = 0,
+      r = 0.4,
+      amount = n,
+      fill = `Hilo Color`
+    ),
+    stat = &#39;pie&#39;,
+    alpha = 0.8
+  ) +
+  scale_fill_manual(values = col_vector[36:44]) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = &quot;black&quot;,
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank(), legend.title = element_blank())
+CH</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-20-6.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotdata &lt;- data %&gt;%
+  group_by(group, `Growth Type`) %&gt;%
+  summarize(n = n()) %&gt;%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %&gt;%
+  ungroup()</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;group&#39;. You can override using the
+`.groups` argument.</code></pre>
+<pre class="r"><code>plotdata$group &lt;- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata &lt;- plotdata %&gt;% left_join(som_coord, by = &quot;group&quot;)
+plotdata &lt;- na.omit(plotdata)
+levels(plotdata$`Growth Type`) &lt;- c(&quot;Determined&quot;,
+                                    &quot;Undetermined&quot;,
+                                    &quot;Semi-determined&quot;)
+
+TC &lt;- p +
+  geom_arc_bar(
+    data = plotdata,
+    aes(
+      x0 = x,
+      y0 = y,
+      r0 = 0,
+      r = 0.4,
+      amount = n,
+      fill = `Growth Type`
+    ),
+    stat = &#39;pie&#39;,
+    alpha = 0.8
+  ) +
+  scale_fill_manual(values = col_vector[45:47]) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = &quot;black&quot;,
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank(), legend.title = element_blank())
+TC</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-20-7.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotdata &lt;- data %&gt;%
+  group_by(group, `Seed Brightness`) %&gt;%
+  summarize(n = n()) %&gt;%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %&gt;%
+  ungroup()</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;group&#39;. You can override using the
+`.groups` argument.</code></pre>
+<pre class="r"><code>plotdata$group &lt;- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata &lt;- plotdata %&gt;% left_join(som_coord, by = &quot;group&quot;)
+plotdata &lt;- na.omit(plotdata)
+levels(plotdata$`Seed Brightness`) &lt;-
+  c(&quot;Average&quot;,
+    &quot;Bright&quot;,
+    &quot;Shiny&quot;,
+    &quot;High&quot;,
+    &quot;Low&quot;,
+    &quot;Low/Average&quot;,
+    &quot;Matte&quot; ,
+    &quot;Opaque&quot;)
+
+BS &lt;- p +
+  geom_arc_bar(
+    data = plotdata,
+    aes(
+      x0 = x,
+      y0 = y,
+      r0 = 0,
+      r = 0.4,
+      amount = n,
+      fill = `Seed Brightness`
+    ),
+    stat = &#39;pie&#39;,
+    alpha = 0.8
+  ) +
+  scale_fill_manual(values = col_vector[48:55]) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = &quot;black&quot;,
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank(), legend.title = element_blank())
+BS</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-20-8.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="graphs-of-productivity-according-to-event-type-and-growth"
+class="section level1">
+<h1>Graphs of productivity according to event type and growth</h1>
+<pre class="r"><code>yield &lt;- read_excel(&quot;data/yield.xlsx&quot;)
+data &lt;- read_excel(&quot;data/data.xlsx&quot;)
+
+#Transforming variables into factors
+yield$Year &lt;- as.factor(yield$Year)
+for (i in 1:ncol(data)) {
+  data[[i]] = as.factor(data[[i]])
+}
+
+# Count graph relating event to year
+levels(data$Event) &lt;-
+  c(
+    &quot;Conventional&quot;,
+    &quot;CV127&quot;,
+    &quot;Intacta™ Roundup Ready™ 2 Pro&quot;,
+    &quot;Liberty Link&quot;,
+    &quot;Roundup Ready&quot;
+  )
+
+ggplot() +
+  geom_bar(data = data, aes(Year, fill = Event)) +
+  geom_point(data = yield,
+             aes(x = Year, y = (Yield * (175 / 125000))),
+             group = 1,
+             color = &quot;#a50026&quot;) +
+  geom_line(
+    data = yield,
+    aes(x = Year, y = Yield * (175 / 125000)),
+    group = 1,
+    color = &quot;#a50026&quot;
+  ) +
+  scale_y_continuous(name = &quot;Count&quot;,
+                     sec.axis = sec_axis( ~ . * 125000 / 175, name = &quot;Yield (Thousand Tons)&quot;)) +
+  theme_bw() +
+  xlab(&quot;Year&quot;) +
+  scale_fill_brewer(palette = &quot;Dark2&quot;) +
+  labs(fill = &quot;Event Type&quot;) +
+  theme(
+    legend.position = c(0.125, 0.85),
+    legend.background = element_rect(fill = &quot;white&quot;, colour = &quot;black&quot;)
+  )</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Count graph relating Growth type to year
+
+levels(data$Growth_type) &lt;- c(&quot;Determined&quot;,
+                              &quot;Undetermined&quot;,
+                              &quot;Semi-determined&quot;)
+
+data %&gt;%
+  filter(Growth_type != &quot;NA&quot;) %&gt;%
+  ggplot() +
+  geom_bar(aes(Year, fill = Growth_type)) +
+  theme_bw() +
+  xlab(&quot;Year&quot;) +
+  ylab(&quot;Count&quot;) +
+  scale_fill_brewer(palette = &quot;Set1&quot;) +
+  labs(fill = &quot;Growth type&quot;) +
+  theme(
+    legend.position = c(0.125, 0.85),
+    legend.background = element_rect(fill = &quot;white&quot;, colour = &quot;black&quot;)
+  )</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-21-2.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.1.3 (2022-03-10)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19042)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=Portuguese_Brazil.1252  LC_CTYPE=Portuguese_Brazil.1252   
+[3] LC_MONETARY=Portuguese_Brazil.1252 LC_NUMERIC=C                      
+[5] LC_TIME=Portuguese_Brazil.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] gridExtra_2.3      ggrepel_0.9.1      RColorBrewer_1.1-3 kohonen_3.0.11    
+ [5] ggforce_0.3.3      reshape2_1.4.4     magrittr_2.0.3     forcats_0.5.1     
+ [9] stringr_1.4.0      dplyr_1.0.9        purrr_0.3.4        readr_2.1.2       
+[13] tidyr_1.2.0        tibble_3.1.7       tidyverse_1.3.1    randomForest_4.7-1
+[17] readxl_1.4.0       factoextra_1.0.7   ggplot2_3.3.5      FactoMineR_2.4    
+
+loaded via a namespace (and not attached):
+ [1] nlme_3.1-157         fs_1.5.2             lubridate_1.8.0     
+ [4] httr_1.4.2           rprojroot_2.0.3      tools_4.1.3         
+ [7] backports_1.4.1      bslib_0.3.1          utf8_1.2.2          
+[10] R6_2.5.1             DT_0.22              mgcv_1.8-40         
+[13] DBI_1.1.2            colorspace_2.0-3     withr_2.5.0         
+[16] tidyselect_1.1.2     compiler_4.1.3       git2r_0.30.1        
+[19] cli_3.2.0            rvest_1.0.2          flashClust_1.01-2   
+[22] xml2_1.3.3           labeling_0.4.2       sass_0.4.1          
+[25] scales_1.2.0         digest_0.6.29        rmarkdown_2.13      
+[28] pkgconfig_2.0.3      htmltools_0.5.2      highr_0.9           
+[31] dbplyr_2.1.1         fastmap_1.1.0        htmlwidgets_1.5.4   
+[34] rlang_1.0.2          rstudioapi_0.13      jquerylib_0.1.4     
+[37] generics_0.1.2       farver_2.1.0         jsonlite_1.8.0      
+[40] leaps_3.1            Matrix_1.4-1         Rcpp_1.0.8.3        
+[43] munsell_0.5.0        fansi_1.0.3          lifecycle_1.0.1     
+[46] scatterplot3d_0.3-41 stringi_1.7.6        whisker_0.4         
+[49] yaml_2.3.5           MASS_7.3-56          plyr_1.8.7          
+[52] grid_4.1.3           promises_1.2.0.1     crayon_1.5.1        
+[55] lattice_0.20-45      splines_4.1.3        haven_2.4.3         
+[58] hms_1.1.1            knitr_1.38           pillar_1.7.0        
+[61] reprex_2.0.1         glue_1.6.2           evaluate_0.15       
+[64] modelr_0.1.8         vctrs_0.4.1          tzdb_0.3.0          
+[67] tweenr_1.0.2         httpuv_1.6.5         cellranger_1.1.0    
+[70] gtable_0.3.0         polyclip_1.10-0      assertthat_0.2.1    
+[73] xfun_0.30            broom_0.7.12         later_1.3.0         
+[76] workflowr_1.7.0      cluster_2.1.2        ellipsis_0.3.2      </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
