@@ -1,13 +1,5 @@
----
-title: "Article: Genetic diversity and interaction between the maintainers of commercial Soybean cultivars using self-organizing maps"
-site: workflowr::wflow_site
-author: "Costa, W.G. et al. 2022"
-output:
-  workflowr::wflow_html:
-    toc: false
-editor_options:
-  chunk_output_type: console
----
+# "Article: Genetic diversity and interaction between the maintainers of commercial Soybean cultivars using self-organizing maps"
+## "Costa, W.G. et al. 2022"
 
 # Loading Libraries
 
