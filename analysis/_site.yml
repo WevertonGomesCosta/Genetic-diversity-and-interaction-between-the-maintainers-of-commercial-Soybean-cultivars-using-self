@@ -1,0 +1,17 @@
+name: "Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self"
+output_dir: ../docs
+navbar:
+  title: "Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self"
+  left:
+  - text: Home
+    href: index.html
+  - text: About
+    href: about.html
+  - text: License
+    href: license.html
+output:
+  workflowr::wflow_html:
+    toc: yes
+    toc_float: yes
+    theme: cosmo
+    highlight: textmate
