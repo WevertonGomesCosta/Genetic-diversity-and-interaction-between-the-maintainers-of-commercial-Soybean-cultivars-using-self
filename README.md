@@ -1,6 +1,6 @@
 # Genetic diversity and interaction between the maintainers of commercial Soybean cultivars using self-organizing maps
 
-## oading Libraries
+## Loading Libraries
 
 ```{r message=FALSE, warning=FALSE}
 library("FactoMineR")
