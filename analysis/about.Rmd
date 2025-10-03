@@ -1,10 +1,101 @@
 ---
 title: "About"
+author: 
+  - Costa, W. G.^[Weverton Gomes da Costa, Doutorando, Pós-Graduação em Genética e Melhoramento - Universidade Federal de Viçosa, wevertonufv@gmail.com]
+date: "`r Sys.Date()`"
+site: workflowr::wflow_site
+url: https://wevertongomescosta.github.io/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self/
 output:
   workflowr::wflow_html:
-    toc: false
+    toc: FALSE
+highlight: github
 editor_options:
   chunk_output_type: console
+github-repo: WevertonGomesCosta/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self
 ---
 
-Describe your project.
+# About this Project
+
+This repository accompanies the article:
+
+**Costa, W.G., et al. (2025). Genetic diversity and interaction between the maintainers of commercial Soybean cultivars using selfing. *Crop Science*.**  
+DOI: [10.1002/csc2.20816](https://doi.org/10.1002/csc2.20816)
+
+The project provides a **fully reproducible workflow** implemented in **R**, combining:
+
+- **Random Forest** for variable selection  
+- **Multiple Correspondence Analysis (MCA)** for dimensionality reduction  
+- **Self-Organizing Maps (SOM)** for clustering maintainers of soybean cultivars  
+- **Visualization tools** to interpret genetic diversity and interaction patterns  
+
+All scripts, data, and outputs are organized to ensure **transparency, reproducibility, and open science**.
+
+---
+
+# Institutional Context
+
+👉 This project is part of the activities of the [**LICAE (Laboratory of Computational Intelligence and Statistical Learning) at UFV**](https://www.licae.ufv.br/), in collaboration with **EMBRAPA** and partner institutions.  
+
+The LICAE specializes in **computational intelligence, machine learning, and statistical modeling** applied to complex problems in **agronomy, genetics, and biological sciences**.
+
+---
+
+# Author
+
+**Weverton Gomes da Costa**  
+- Postdoctoral Researcher, Department of Statistics – Federal University of Viçosa (UFV)  
+- [LinkedIn](https://www.linkedin.com/in/wevertoncosta/)  
+- [ORCID](https://orcid.org/0000-0003-0742-5936)  
+- [Lattes](http://lattes.cnpq.br/2723811288754046)  
+- [Google Scholar](https://scholar.google.com.br/citations?hl=pt-BR&user=eJNKcHsAAAAJ)  
+- [GitHub](https://github.com/WevertonGomesCosta)  
+
+---
+
+# License
+
+This project is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License**.  
+See the [LICENSE](license.html) file for details.
+
+---
+
+# Sobre este Projeto (PT-BR)
+
+Este repositório acompanha o artigo:
+
+**Costa, W.G., et al. (2025). Diversidade genética e interação entre os mantenedores de cultivares comerciais de soja utilizando autofecundação. *Crop Science*.**  
+DOI: [10.1002/csc2.20816](https://doi.org/10.1002/csc2.20816)
+
+O projeto disponibiliza um **workflow totalmente reprodutível** em **R**, combinando:
+
+- **Random Forest** para seleção de variáveis  
+- **Análise de Correspondência Múltipla (MCA)** para redução de dimensionalidade  
+- **Mapas Auto-Organizáveis de Kohonen (SOM)** para agrupamento de mantenedores  
+- **Ferramentas de visualização** para interpretar diversidade genética e padrões de interação  
+
+---
+
+# Contexto Institucional
+
+👉 Este projeto integra as atividades do [**LICAE (Laboratório de Inteligência Computacional e Aprendizado Estatístico) da UFV**](https://www.licae.ufv.br/), em colaboração com a **EMBRAPA** e instituições parceiras.  
+
+O LICAE é especializado em **inteligência computacional, aprendizado de máquina e modelagem estatística** aplicados a problemas complexos em **agronomia, genética e ciências biológicas**.
+
+---
+
+# Autor
+
+**Weverton Gomes da Costa**  
+- Pós-Doutorando, Departamento de Estatística – Universidade Federal de Viçosa (UFV)  
+- [LinkedIn](https://www.linkedin.com/in/wevertoncosta/)  
+- [ORCID](https://orcid.org/0000-0003-0742-5936)  
+- [Lattes](http://lattes.cnpq.br/2723811288754046)  
+- [Google Scholar](https://scholar.google.com.br/citations?hl=pt-BR&user=eJNKcHsAAAAJ)  
+- [GitHub](https://github.com/WevertonGomesCosta)  
+
+---
+
+# Licença
+
+Este projeto está licenciado sob a **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License**.  
+Consulte o arquivo [LICENSE](license.html) para mais detalhes.

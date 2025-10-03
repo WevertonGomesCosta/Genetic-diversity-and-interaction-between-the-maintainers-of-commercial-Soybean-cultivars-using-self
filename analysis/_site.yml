@@ -1,14 +1,27 @@
 name: "Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self"
 output_dir: ../docs
+lang: "en"
+
 navbar:
-  title: "Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self"
+  title: "Soybean Genetic Diversity"
   left:
-  - text: Home
-    href: index.html
-  - text: About
-    href: about.html
-  - text: License
-    href: license.html
+    - text: Home
+      href: index.html
+    - text: Analysis
+      href: script.html
+    - text: About
+      href: about.html
+    - text: License
+      href: license.html
+    - text: Publication
+      href: https://doi.org/10.1002/csc2.20816
+    - text: LICAE
+      href: https://www.licae.ufv.br/
+  right:
+    - icon: fa-github
+      text: Source code
+      href: https://github.com/WevertonGomesCosta/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self
+
 output:
   workflowr::wflow_html:
     toc: yes

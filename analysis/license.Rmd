@@ -1,21 +1,53 @@
 ---
 title: "License"
+author: 
+  - Costa, W. G.^[Weverton Gomes da Costa, Doutorando, Pós-Graduação em Genética e Melhoramento - Universidade Federal de Viçosa, wevertonufv@gmail.com]
+date: "`r Sys.Date()`"
+site: workflowr::wflow_site
+url: https://wevertongomescosta.github.io/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self/
 output:
   workflowr::wflow_html:
-    toc: false
+    toc: FALSE
+highlight: github
 editor_options:
   chunk_output_type: console
+github-repo: WevertonGomesCosta/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self
 ---
 
-What license are you using for your code? See [choosealicense.com][choose] for
-help deciding. It's a convention to save a file `LICENSE` in the root of your
-Git repo that contains the license text.
+## Licença (PT-BR)
 
-What license are you using for the written content on your site? It is
-traditional to choose a [Creative Commons][cc] license for this type of content.
+Este material foi produzido por [Costa, W. G.](https://github.com/WevertonGomesCosta) e está licenciado sob a **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License**.
 
-[choose]: https://choosealicense.com/
-[cc]: https://creativecommons.org/choose/
+Você é livre para:
 
-How should others cite your work? It's a convention to save a file `CITATION`
-in the root of your Git repo that contains the citation information.
+- **Compartilhar:** copiar e redistribuir o material em qualquer formato ou mídia  
+- **Adaptar:** remixar, transformar e construir sobre o material  
+
+Desde que siga os termos da licença:
+
+- **Atribuição:** dê crédito apropriado, forneça um link para a licença e indique se foram feitas alterações, sem sugerir apoio do licenciante  
+- **Não comercial:** não use o material para fins comerciais  
+- **Compartilhar pela mesma licença:** se remixar, transformar ou construir sobre o material, distribua suas contribuições sob a mesma licença  
+
+Para mais informações, consulte a licença completa:  
+[https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt)
+
+---
+
+## License (EN)
+
+This material was produced by [Costa, W. G.](https://github.com/WevertonGomesCosta) and is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License**.
+
+You are free to:
+
+- **Share:** copy and redistribute the material in any medium or format  
+- **Adapt:** remix, transform, and build upon the material  
+
+Under the following terms:
+
+- **Attribution:** give appropriate credit, provide a link to the license, and indicate if changes were made, without implying endorsement  
+- **NonCommercial:** you may not use the material for commercial purposes  
+- **ShareAlike:** if you remix, transform, or build upon the material, you must distribute your contributions under the same license  
+
+For more information, see the full license:  
+[https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
