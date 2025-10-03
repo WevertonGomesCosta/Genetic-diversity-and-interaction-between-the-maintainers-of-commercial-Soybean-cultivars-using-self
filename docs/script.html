@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Costa, W. G." />
+
+<meta name="date" content="2025-10-03" />
+
+<title>Genetic diversity and interaction between the maintainers of commercial Soybean cultivars using self-organizing maps</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Soybean Genetic Diversity</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="script.html">Analysis</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+<li>
+  <a href="https://doi.org/10.1002/csc2.20816">Publication</a>
+</li>
+<li>
+  <a href="https://www.licae.ufv.br/">LICAE</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/WevertonGomesCosta/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Genetic diversity and interaction between
+the maintainers of commercial Soybean cultivars using self-organizing
+maps</h1>
+<h4 class="author">Costa, W. G.<a href="#fn1" class="footnote-ref"
+id="fnref1"><sup>1</sup></a></h4>
+<h4 class="date">2025-10-03</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2025-10-03
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong>
+<code>Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self/</code>
+<span class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.2). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220620code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220620)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220620code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220620)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaGeneticdiversityandinteractionbetweenthemaintainersofcommercialSoybeancultivarsusingselftree6d4687ddf46195d85e6308c25f872ca9a2cc2309targetblank6d4687da">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/WevertonGomesCosta/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self/tree/6d4687ddf46195d85e6308c25f872ca9a2cc2309" target="_blank">6d4687d</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomWevertonGomesCostaGeneticdiversityandinteractionbetweenthemaintainersofcommercialSoybeancultivarsusingselftree6d4687ddf46195d85e6308c25f872ca9a2cc2309targetblank6d4687da"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/WevertonGomesCosta/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self/tree/6d4687ddf46195d85e6308c25f872ca9a2cc2309" target="_blank">6d4687d</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  analysis/script.Rmd
+
+Unstaged changes:
+    Modified:   README.md
+    Modified:   analysis/_site.yml
+    Modified:   analysis/about.Rmd
+    Modified:   analysis/index.Rmd
+    Modified:   analysis/license.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This script performs an analysis of genetic diversity and interaction
+among maintainers of commercial soybean cultivars using selfing. The
+analysis involves several steps, including data preprocessing, variable
+selection using Random Forest, dimensionality reduction with Multiple
+Correspondence Analysis (MCA), and clustering with Self-Organizing Maps
+(SOM). The results are visualized through various plots to interpret the
+patterns of diversity and trait distributions.</p>
+<p>This document presents the main steps of the analysis described in
+the article:</p>
+<p><strong>Costa, W.G., et al. (2025). Genetic diversity and interaction
+between the maintainers of commercial Soybean cultivars using selfing.
+<em>Crop Science</em>.</strong><br />
+DOI: <a
+href="https://doi.org/10.1002/csc2.20816">10.1002/csc2.20816</a></p>
+<p>We will go through the following stages:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Data preparation</strong><br />
+</li>
+<li><strong>Variable selection with Random Forest</strong><br />
+</li>
+<li><strong>Dimensionality reduction with MCA</strong><br />
+</li>
+<li><strong>Clustering with Self-Organizing Maps (SOM)</strong><br />
+</li>
+<li><strong>Visualization of diversity and trait
+distributions</strong></li>
+</ol>
+<hr />
+</div>
+<div id="step-1-loading-libraries" class="section level1">
+<h1>Step 1: Loading Libraries</h1>
+<p>We start by loading the main R packages used in the analysis.</p>
+<pre class="r"><code>library(&quot;FactoMineR&quot;)     # Métodos de análise multivariada, incluindo MCA (Multiple Correspondence Analysis)
+library(&quot;factoextra&quot;)     # Funções para visualização elegante de resultados de análises multivariadas (PCA, MCA, clustering)
+library(readxl)           # Importação de arquivos Excel (.xlsx), onde estão armazenados os dados brutos
+library(randomForest)     # Implementação do algoritmo Random Forest para seleção de variáveis e análise de importância
+library(tidyverse)        # Conjunto de pacotes (dplyr, ggplot2, tidyr, etc.) para manipulação e visualização de dados
+require(magrittr)         # Operador pipe (%&gt;%) e funções auxiliares para tornar o código mais legível
+require(reshape2)         # Funções para reorganizar dados (melt, cast), úteis em gráficos e análises
+library(ggforce)          # Extensões do ggplot2 para gráficos avançados (arcos, diagramas, formas geométricas)
+library(&quot;kohonen&quot;)        # Implementação de Mapas Auto-Organizáveis (Self-Organizing Maps - SOM) para clustering
+library(RColorBrewer)     # Paletas de cores pré-definidas para melhorar a estética dos gráficos
+require(&quot;ggrepel&quot;)        # Rótulos de texto em gráficos ggplot2 que evitam sobreposição (geom_text_repel)
+library(gridExtra)        # Combinação e organização de múltiplos gráficos em uma mesma página/figura</code></pre>
+</div>
+<div id="step-2-defining-colors" class="section level1">
+<h1>Step 2: Defining Colors</h1>
+<p>We define a qualitative color palette using
+<strong>RColorBrewer</strong>.<br />
+These palettes are especially useful for categorical data, ensuring that
+groups (e.g., maintainers or trait categories) are visually distinct in
+the plots.</p>
+<pre class="r"><code>qual_col_pals = brewer.pal.info[brewer.pal.info$category == &#39;qual&#39;, ]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))</code></pre>
+</div>
+<div id="step-3-reading-the-data" class="section level1">
+<h1>Step 3: Reading the Data</h1>
+<p>We import the dataset containing information about soybean cultivar
+maintainers and their morphological descriptors.<br />
+The data is stored in an Excel file (<code>data.xlsx</code>).</p>
+<pre class="r"><code>data &lt;- read_excel(&quot;data/data.xlsx&quot;)</code></pre>
+</div>
+<div id="step-4-data-cleaning" class="section level1">
+<h1>Step 4: Data Cleaning</h1>
+<p>To ensure robust analysis, we remove maintainers with very few
+observations (≤ 5).<br />
+Small sample sizes can introduce noise and bias in clustering and
+multivariate methods, so filtering them out improves the reliability of
+the results.</p>
+<pre class="r"><code>lower5 &lt;- data %&gt;%
+  group_by(Maintainer_coded) %&gt;%
+  count() %&gt;%
+  filter(n &lt;= 5)
+
+data &lt;- data[!data$Maintainer_coded %in% lower5$Maintainer_coded, ]</code></pre>
+</div>
+<div id="step-5-transforming-variables-into-factors"
+class="section level1">
+<h1>Step 5: Transforming Variables into Factors</h1>
+<p>Most of the descriptors in the dataset are <strong>categorical
+traits</strong> (e.g., seed color, growth type, pubescence
+density).<br />
+To ensure that statistical methods such as <strong>Random
+Forest</strong> and <strong>Multiple Correspondence Analysis
+(MCA)</strong> handle them correctly, we convert all variables into
+factors.</p>
+<pre class="r"><code>for (i in 1:ncol(data)) {
+  data[[i]] = as.factor(data[[i]])
+}</code></pre>
+<p><em>Explanation:</em><br />
+By converting all columns into factors, we guarantee that categorical
+variables are treated as qualitative data rather than numeric codes.
+This step is essential for analyses that rely on the categorical nature
+of traits, such as MCA, which is designed specifically for factor
+variables.</p>
+<hr />
+</div>
+<div id="step-6-variable-selection-with-random-forest"
+class="section level1">
+<h1>Step 6: Variable Selection with Random Forest</h1>
+<p>In this step, we apply the <strong>Random Forest</strong> algorithm
+to identify which traits are most important for distinguishing soybean
+cultivar maintainers.<br />
+Random Forest is an ensemble method that builds multiple decision trees
+and aggregates their results, providing both classification accuracy and
+a measure of variable importance.</p>
+<ul>
+<li><strong>Goal:</strong> Reduce dimensionality by focusing on the most
+informative traits.<br />
+</li>
+<li><strong>Output:</strong> A ranking of traits based on their
+contribution to classification accuracy and node purity (Gini
+index).</li>
+</ul>
+<pre class="r"><code>set.seed(123) # Ensures reproducibility
+
+# Excluding Name, Maintainer and Year variables (not used in the analysis)
+data = data[, -c(1, 2, 5)] 
+
+ntraits &lt;- (ncol(data) - 1) / 3 # Number of traits divided by 3
+ntree &lt;- 500 # Number of trees
+
+# Fit Random Forest model
+rf_model &lt;- randomForest(
+  data$Maintainer_coded ~ .,
+  data = data,
+  mtry = ntraits,
+  importance = TRUE,
+  proximity = TRUE,
+  ntree = ntree,
+  na.action = na.roughfix
+)</code></pre>
+<p><em>Explanation:</em><br />
+The Random Forest model provides two importance measures:<br />
+- <strong>Accuracy</strong>: how much classification accuracy decreases
+if the variable is removed.<br />
+- <strong>Gini Index</strong>: how much the variable contributes to node
+purity in decision trees.</p>
+<hr />
+<div id="importance-of-traits-based-on-accuracy-and-gini-index"
+class="section level2">
+<h2>Importance of traits based on Accuracy and Gini Index</h2>
+<pre class="r"><code>imp &lt;- as.data.frame(varImpPlot(rf_model))</code></pre>
+<p><img src="figure/script.Rmd/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>imp$traitnames &lt;- rownames(imp)
+imp_trait &lt;- melt(imp, id.var = &quot;traitnames&quot;)
+imp_trait$traitnames &lt;- as.factor(imp_trait$traitnames)
+levels(imp_trait$traitnames) &lt;- c(
+  &quot;Event Type&quot;,
+  &quot;Flower Color&quot;,
+  &quot;Growth Type&quot;,
+  &quot;Hilo Color&quot;,
+  &quot;Hypocotyl&quot;,
+  &quot;Legum Color&quot;,
+  &quot;Peroxidase Reaction&quot;,
+  &quot;Pubescence Color&quot;,
+  &quot;Pubescence Density&quot;,
+  &quot;Seed Brightness&quot;,
+  &quot;Seed Shape&quot;,
+  &quot;Tegument Color&quot;
+)</code></pre>
+<div id="plot-importance-of-traits" class="section level3">
+<h3>Plot importance of traits</h3>
+<pre class="r"><code>imp_trait %&gt;%
+  mutate(traitnames = fct_reorder(traitnames, value)) %&gt;%
+  ggplot(aes(x = traitnames, y = value)) +
+  geom_point(aes(colour = variable, shape = variable), size = 4) +
+  scale_colour_discrete(labels = c(&quot;Accuracy&quot;, &quot;Gini Index&quot;)) +
+  scale_shape_discrete(labels = c(&quot;Accuracy&quot;, &quot;Gini Index&quot;)) +
+  geom_segment(aes(
+    x = traitnames,
+    xend = traitnames,
+    y = 0,
+    yend = value
+  )) +
+  ylab(&quot;Increase in node purity&quot;) +
+  xlab(&quot;&quot;) +
+  theme_minimal() +
+  theme(
+    legend.position = c(0.8, 0.15),
+    legend.title = element_blank(),
+    legend.background = element_rect(fill = &quot;white&quot;, colour = &quot;black&quot;),
+    legend.key.size = unit(0.5, &quot;cm&quot;),
+    axis.text.y = element_text(angle = 15, vjust = 0.5, hjust = 1)
+  ) +
+  coord_flip()</code></pre>
+<p><img src="figure/script.Rmd/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+</div>
+<div id="excluding-the-4-least-important-traits" class="section level2">
+<h2>Excluding the 4 least important traits</h2>
+<p>To simplify the dataset and reduce noise, we exclude the four traits
+with the lowest importance scores.</p>
+<pre class="r"><code>x &lt;- imp_trait %&gt;%
+  group_by(traitnames) %&gt;%
+  summarise(value = mean(value)) %&gt;%
+  slice_min(value, n = 4, with_ties = FALSE) %&gt;%
+  ungroup()
+
+colnames(data) &lt;- c(
+  &quot;Maintainer_coded&quot;,
+  &quot;Event Type&quot;,
+  &quot;Flower Color&quot;,
+  &quot;Legum Color&quot;,
+  &quot;Seed Shape&quot;,
+  &quot;Tegument Color&quot;,
+  &quot;Hypocotyl&quot;,
+  &quot;Pubescence Color&quot;,
+  &quot;Pubescence Density&quot;,
+  &quot;Hilo Color&quot;,
+  &quot;Peroxidase Reaction&quot;,
+  &quot;Growth Type&quot;,
+  &quot;Seed Brightness&quot;
+)
+
+# Remove the least important traits
+data &lt;- data %&gt;% select(!any_of(x$traitnames))</code></pre>
+</div>
+</div>
+<div id="step-7-multiple-correspondence-analysis-mca"
+class="section level1">
+<h1>Step 7: Multiple Correspondence Analysis (MCA)</h1>
+<p>In this step, we apply <strong>Multiple Correspondence Analysis
+(MCA)</strong> to reduce the dimensionality of the categorical
+dataset.<br />
+MCA is particularly suitable for analyzing relationships between
+categorical variables, allowing us to summarize the information into a
+smaller number of dimensions while preserving as much variance as
+possible.</p>
+<hr />
+<div id="running-mca" class="section level2">
+<h2>Running MCA</h2>
+<p>We run MCA on the dataset, treating the first column
+(<code>Maintainer_coded</code>) as a supplementary qualitative variable
+(not used to build the axes but projected afterwards).</p>
+<pre class="r"><code>res.mca &lt;- MCA(
+  data,
+  quali.sup = 1,   # Maintainer_coded as supplementary variable
+  graph = FALSE,   # Suppress automatic plots
+  ncp = 54         # Number of dimensions to compute
+)</code></pre>
+<hr />
+</div>
+<div id="eigenvalues" class="section level2">
+<h2>Eigenvalues</h2>
+<p>The eigenvalues represent the amount of variance explained by each
+dimension.<br />
+By examining them, we can decide how many dimensions are relevant for
+interpretation.</p>
+<pre class="r"><code>eig.val &lt;- get_eigenvalue(res.mca)
+eig.val</code></pre>
+<pre><code>        eigenvalue variance.percent cumulative.variance.percent
+Dim.1  0.402480476       5.96267372                    5.962674
+Dim.2  0.284778036       4.21893386                   10.181608
+Dim.3  0.270253673       4.00375812                   14.185366
+Dim.4  0.203433768       3.01383360                   17.199199
+Dim.5  0.187328114       2.77523131                   19.974431
+Dim.6  0.184031980       2.72639971                   22.700830
+Dim.7  0.167652926       2.48374705                   25.184577
+Dim.8  0.162517355       2.40766453                   27.592242
+Dim.9  0.152768789       2.26324131                   29.855483
+Dim.10 0.151812314       2.24907132                   32.104555
+Dim.11 0.148000840       2.19260504                   34.297160
+Dim.12 0.144838569       2.14575658                   36.442916
+Dim.13 0.143065848       2.11949404                   38.562410
+Dim.14 0.140373737       2.07961091                   40.642021
+Dim.15 0.139461100       2.06609037                   42.708111
+Dim.16 0.136846878       2.02736115                   44.735473
+Dim.17 0.134072117       1.98625359                   46.721726
+Dim.18 0.131163553       1.94316375                   48.664890
+Dim.19 0.128359156       1.90161712                   50.566507
+Dim.20 0.127350293       1.88667100                   52.453178
+Dim.21 0.126977040       1.88114133                   54.334319
+Dim.22 0.125921907       1.86550973                   56.199829
+Dim.23 0.125356705       1.85713638                   58.056966
+Dim.24 0.125303122       1.85634254                   59.913308
+Dim.25 0.124671194       1.84698065                   61.760289
+Dim.26 0.123799723       1.83406997                   63.594359
+Dim.27 0.122764633       1.81873531                   65.413094
+Dim.28 0.121421046       1.79883032                   67.211924
+Dim.29 0.120260820       1.78164178                   68.993566
+Dim.30 0.117533062       1.74123054                   70.734797
+Dim.31 0.115027236       1.70410720                   72.438904
+Dim.32 0.114202013       1.69188168                   74.130785
+Dim.33 0.111507893       1.65196878                   75.782754
+Dim.34 0.109699995       1.62518511                   77.407939
+Dim.35 0.108166876       1.60247224                   79.010412
+Dim.36 0.106518586       1.57805313                   80.588465
+Dim.37 0.105464112       1.56243129                   82.150896
+Dim.38 0.101919534       1.50991903                   83.660815
+Dim.39 0.099461844       1.47350881                   85.134324
+Dim.40 0.097671687       1.44698795                   86.581312
+Dim.41 0.094878115       1.40560170                   87.986914
+Dim.42 0.093241012       1.38134833                   89.368262
+Dim.43 0.088330043       1.30859323                   90.676855
+Dim.44 0.082579662       1.22340241                   91.900257
+Dim.45 0.078630285       1.16489312                   93.065151
+Dim.46 0.074562314       1.10462688                   94.169777
+Dim.47 0.071196443       1.05476212                   95.224540
+Dim.48 0.065856898       0.97565775                   96.200197
+Dim.49 0.063338828       0.93835301                   97.138550
+Dim.50 0.056963360       0.84390163                   97.982452
+Dim.51 0.054646507       0.80957788                   98.792030
+Dim.52 0.052252523       0.77411146                   99.566141
+Dim.53 0.025303341       0.37486431                   99.941006
+Dim.54 0.003982118       0.05899435                  100.000000</code></pre>
+<pre class="r"><code># Convert to data frame for plotting
+eig.val &lt;- as.data.frame(eig.val)
+eig.val$Dimension &lt;- as.numeric(str_replace(rownames(eig.val), &quot;Dim.&quot;, &quot;&quot;))</code></pre>
+<hr />
+</div>
+<div id="cumulative-variance-explained" class="section level2">
+<h2>Cumulative Variance Explained</h2>
+<p>We plot the cumulative variance explained by the dimensions.<br />
+This helps us identify the number of dimensions that capture most of the
+variability in the data.</p>
+<pre class="r"><code>ggplot(data = eig.val, aes(x = Dimension, y = cumulative.variance.percent)) +
+  geom_bar(stat = &quot;identity&quot;, fill = &quot;#00AFBB&quot;, alpha = 0.5) +
+  geom_point(colour = &quot;#FC4E07&quot;) +
+  geom_line(colour = &quot;#FC4E07&quot;) +
+  scale_x_continuous(breaks = c(1:nrow(eig.val)), expand = c(0.01, 0)) +
+  scale_y_continuous(expand = expansion(mult = c(0, .05))) +
+  theme_bw() +
+  labs(
+    x = &quot;Dimensions&quot;,
+    y = &quot;Cumulative variance percent&quot;
+  )</code></pre>
+<p><img src="figure/script.Rmd/unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><em>Interpretation:</em><br />
+- The first few dimensions usually explain the majority of the
+variance.<br />
+- We will focus on these dimensions in the next steps (clustering with
+SOM), as they capture the most relevant patterns of diversity among
+maintainers.</p>
+<hr />
+</div>
+</div>
+<div id="step-8-clustering-with-self-organizing-maps-som"
+class="section level1">
+<h1>Step 8: Clustering with Self-Organizing Maps (SOM)</h1>
+<p>In this step, we use <strong>Kohonen’s Self-Organizing Maps
+(SOM)</strong> to group soybean cultivar maintainers based on their
+coordinates obtained from the MCA.<br />
+SOM is an <strong>unsupervised neural network</strong> that projects
+high-dimensional data into a two-dimensional grid, preserving the
+topological relationships between observations.<br />
+This allows us to identify clusters of maintainers with similar genetic
+profiles.</p>
+<hr />
+<div id="defining-the-som-grid" class="section level2">
+<h2>Defining the SOM Grid</h2>
+<p>We first define the <strong>network topology</strong> (grid) and
+parameters for training the SOM.</p>
+<ul>
+<li><code>map_dimension = 4</code>: creates a 4x4 hexagonal grid (16
+neurons).<br />
+</li>
+<li><code>n_iterations = 2000</code>: number of training
+iterations.<br />
+</li>
+<li><code>topo = "hexagonal"</code>: hexagonal topology ensures smoother
+neighborhood relations.<br />
+</li>
+<li><code>toroidal = FALSE</code>: edges of the grid are not
+connected.</li>
+</ul>
+<pre class="r"><code># Network topology and parameters
+map_dimension = 4
+n_iterations = 2000
+
+# Define SOM grid
+som_grid = kohonen::somgrid(
+  xdim = map_dimension,
+  ydim = map_dimension,
+  topo = &quot;hexagonal&quot;,
+  toroidal = FALSE
+)
+
+# Coordinates of maintainers in the MCA space (54 dimensions)
+b &lt;- res.mca[[&quot;quali.sup&quot;]][[&quot;coord&quot;]]</code></pre>
+<hr />
+</div>
+<div id="training-the-som" class="section level2">
+<h2>Training the SOM</h2>
+<p>We now train the SOM using the MCA coordinates as input.<br />
+The data is scaled to ensure all dimensions contribute equally to the
+distance calculations.</p>
+<ul>
+<li><code>rlen = n_iterations</code>: number of iterations.<br />
+</li>
+<li><code>alpha = c(0.05, 0.01)</code>: learning rate schedule (starts
+at 0.05 and decreases to 0.01).<br />
+</li>
+<li><code>dist.fcts = 'euclidean'</code>: Euclidean distance is used to
+measure similarity.</li>
+</ul>
+<pre class="r"><code>set.seed(123) # Ensures reproducibility
+
+m = kohonen::supersom(
+  scale(b),          # Input data (scaled MCA coordinates)
+  grid = som_grid,   # SOM grid defined above
+  rlen = n_iterations,
+  alpha = c(0.05, 0.01),
+  dist.fcts = &#39;euclidean&#39;
+)</code></pre>
+<p><em>Interpretation:</em><br />
+The trained SOM organizes maintainers into clusters on the 2D
+grid.<br />
+- Each hexagon (neuron) represents a group of maintainers with similar
+trait profiles.<br />
+- Neighboring hexagons contain maintainers that are more similar to each
+other.<br />
+- This clustering will be visualized in the next steps to interpret
+diversity and interaction patterns.</p>
+</div>
+</div>
+<div id="step-9-visualizing-the-som-results" class="section level1">
+<h1>Step 9: Visualizing the SOM Results</h1>
+<p>After training the Self-Organizing Map (SOM), we now explore its
+outputs through different visualizations.<br />
+These plots help us evaluate the quality of the training, the stability
+of the clusters, and the relationships between neighboring neurons.</p>
+<hr />
+<div id="interaction-graph" class="section level2">
+<h2>Interaction Graph</h2>
+<p>The <strong>interaction graph</strong> shows how the average distance
+to the closest unit decreases during training.<br />
+A smooth decline indicates that the SOM is converging and
+stabilizing.</p>
+<pre class="r"><code>progress &lt;- as.data.frame(cbind(m$changes, 1:nrow(m$changes)))
+colnames(progress) &lt;- c(&quot;Mean distance to closest unit&quot;, &quot;Iteration&quot;)
+
+ggplot(progress, aes(Iteration, `Mean distance to closest unit`)) +
+  geom_line(color = &quot;#00AFBB&quot;, linewidth  = 1) +
+  stat_smooth(color = &quot;#FC4E07&quot;,
+              fill = &quot;#FC4E07&quot;,
+              method = &quot;loess&quot;) +
+  theme_minimal() +
+  labs(y = colnames(progress[1]))</code></pre>
+<p><img src="figure/script.Rmd/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><em>Interpretation:</em><br />
+- The curve should decrease as iterations progress.<br />
+- A plateau indicates that the SOM has reached stability.</p>
+<hr />
+</div>
+<div id="trait-frequency" class="section level2">
+<h2>Trait Frequency</h2>
+<p>We assign each maintainer to a SOM unit (cluster) and merge this
+classification back into the dataset.<br />
+This allows us to analyze the frequency of traits within each
+cluster.</p>
+<pre class="r"><code>grouping &lt;- as_tibble(cbind(m$unit.classif, rownames(b)))
+colnames(grouping) &lt;- c(&quot;group&quot;, &quot;Maintainer_coded&quot;)
+grouping$group &lt;- as.factor(grouping$group)
+grouping$Maintainer_coded &lt;- as.factor(grouping$Maintainer_coded)
+
+# Merge cluster assignment into the dataset
+data &lt;- data %&gt;% left_join(grouping)</code></pre>
+<p><em>Interpretation:</em><br />
+Each maintainer is now associated with a cluster (group), enabling trait
+distribution analysis across clusters.</p>
+<hr />
+</div>
+<div id="distance-graph-between-neighboring-neurons"
+class="section level2">
+<h2>Distance Graph Between Neighboring Neurons</h2>
+<p>This visualization shows the <strong>average distance between
+neighboring neurons</strong> in the SOM grid.<br />
+It highlights regions of the map where clusters are more distinct
+(larger distances) or more similar (smaller distances).</p>
+<pre class="r"><code>som_coord &lt;- m[[4]]$pts %&gt;%
+  as_tibble %&gt;%
+  mutate(group = as.integer(row_number()))
+
+som_pts &lt;- tibble(group = as.integer(m[[2]]),
+                  dist = m[[3]])
+
+ndist &lt;- unit.distances(m$grid)
+cddist &lt;- as.matrix(object.distances(m, type = &quot;codes&quot;))
+cddist[abs(ndist - 1) &gt; .001] &lt;- NA
+neigh.dists &lt;- colMeans(cddist, na.rm = TRUE)
+som_coord &lt;- som_coord %&gt;% mutate(dist = neigh.dists)
+
+neigdists &lt;- som_coord %&gt;%
+  ggplot(aes(x0 = x, y0 = y)) +
+  geom_regon(aes(
+    r = 0.5,
+    angle = 11,
+    sides = 6,
+    fill = dist
+  ),
+  expand = unit(0.1, &#39;cm&#39;)) +
+  scale_fill_gradient(low = &quot;red&quot;, high = &quot;yellow&quot;, name = &quot;Distance&quot;) +
+  theme(
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    legend.position = &quot;bottom&quot;
+  ) +
+  geom_text_repel(
+    data = som_coord,
+    aes(x = x, y = y, label = group),
+    hjust        = 0.5,
+    force = 0,
+    color = &quot;black&quot;,
+    show.legend = FALSE,
+    segment.color = NA
+  )
+
+neigdists</code></pre>
+<p><img src="figure/script.Rmd/unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><em>Interpretation:</em><br />
+- <strong>Red areas</strong> indicate neurons that are more distinct
+from their neighbors (potential cluster boundaries).<br />
+- <strong>Yellow areas</strong> indicate neurons that are more similar
+to their neighbors (homogeneous regions).<br />
+- The labels show the neuron (cluster) IDs.</p>
+<hr />
+</div>
+</div>
+<div id="step-10-distribution-of-maintainers-and-traits-in-som-clusters"
+class="section level1">
+<h1>Step 10: Distribution of Maintainers and Traits in SOM Clusters</h1>
+<p>After training and validating the SOM, we now visualize how
+<strong>maintainers</strong> and their <strong>traits</strong> are
+distributed across the clusters.<br />
+This step is crucial to interpret the biological meaning of the clusters
+and to identify which characteristics are most associated with each
+group.</p>
+<hr />
+<div id="graph-distribution-of-maintainers-in-clusters"
+class="section level2">
+<h2>Graph: Distribution of Maintainers in Clusters</h2>
+<p>This plot shows the position of each maintainer in the SOM
+grid.<br />
+Each hexagon represents a neuron (cluster), and labels indicate the
+maintainers assigned to that cluster.</p>
+<pre class="r"><code>p &lt;- som_coord %&gt;%
+  ggplot(aes(x0 = x, y0 = y)) +
+  geom_regon(aes(
+    r = 0.5,
+    angle = 11,
+    sides = 6,
+    fill = factor(group)
+  ),
+  expand = unit(0.1, &#39;cm&#39;)) +
+  theme(
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    legend.position = &quot;none&quot;
+  ) +
+  scale_fill_manual(values = col_vector[40:56])
+
+plotdata &lt;- data %&gt;%
+  group_by(group, Maintainer_coded) %&gt;%
+  summarize(n = n()) %&gt;%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %&gt;%
+  ungroup()
+
+plotdata$group &lt;- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata &lt;- plotdata %&gt;% left_join(som_coord, by = &quot;group&quot;)
+plotdata &lt;- na.omit(plotdata)
+
+MC &lt;- p +
+  geom_label_repel(
+    data = plotdata,
+    aes(x = x, y = y, label = Maintainer_coded),
+    max.overlaps = Inf,
+    box.padding = 0.1,
+    hjust        = 0.5,
+    direction    = &quot;y&quot;,
+    color = &quot;black&quot;,
+    show.legend = FALSE,
+    segment.color = NA
+  ) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = &quot;black&quot;,
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank())
+MC</code></pre>
+<p><img src="figure/script.Rmd/graph-maintainers-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><em>Interpretation:</em><br />
+- Each maintainer is placed in a cluster (hexagon).<br />
+- Clusters with multiple maintainers indicate groups with similar
+genetic profiles.</p>
+<hr />
+</div>
+<div id="graphs-distribution-of-trait-categories-by-cluster"
+class="section level2">
+<h2>Graphs: Distribution of Trait Categories by Cluster</h2>
+<p>We now visualize how <strong>trait categories</strong> (e.g., Event
+Type, Legum Color, Seed Shape, Hypocotyl, Pubescence Color, Hilo Color,
+Growth Type, Seed Brightness) are distributed across clusters.<br />
+Each cluster is represented by a <strong>pie chart</strong>, showing the
+proportion of each trait category within that cluster.</p>
+<p>Example: <strong>Event Type</strong></p>
+<pre class="r"><code>p &lt;- som_coord %&gt;%
+  ggplot(aes(x0 = x, y0 = y)) +
+  geom_regon(
+    aes(r = 0.5, angle = 11, sides = 6),
+    expand = unit(0.1, &#39;cm&#39;),
+    alpha = 0,
+    color = &quot;black&quot;
+  ) +
+  theme(
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    legend.position = &quot;bottom&quot;
+  )
+
+plotdata &lt;- data %&gt;%
+  group_by(group, `Event Type`) %&gt;%
+  summarize(n = n()) %&gt;%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %&gt;%
+  ungroup()
+
+plotdata$group &lt;- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata &lt;- plotdata %&gt;% left_join(som_coord, by = &quot;group&quot;)
+plotdata &lt;- na.omit(plotdata)
+levels(plotdata$`Event Type`) &lt;-
+  c(
+    &quot;Conventional&quot;,
+    &quot;CV127&quot;,
+    &quot;Intacta™ Roundup Ready™ 2 Pro&quot;,
+    &quot;Liberty Link&quot;,
+    &quot;Roundup Ready&quot;
+  )
+
+EV &lt;- p +
+  geom_arc_bar(
+    data = plotdata,
+    aes(
+      x0 = x,
+      y0 = y,
+      r0 = 0,
+      r = 0.4,
+      amount = n,
+      fill = `Event Type`
+    ),
+    stat = &#39;pie&#39;,
+    alpha = 0.8
+  ) +
+  scale_fill_manual(values = col_vector[1:5]) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = &quot;black&quot;,
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank(), legend.title = element_blank())
+EV</code></pre>
+<p><img src="figure/script.Rmd/graph-event-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><em>Interpretation:</em><br />
+- Each cluster shows the proportion of cultivars belonging to different
+<strong>event types</strong>.<br />
+- Similar plots can be generated for <strong>Legum Color, Seed Shape,
+Hypocotyl, Pubescence Color, Hilo Color, Growth Type, and Seed
+Brightness</strong> (as in your code).<br />
+- These visualizations help identify which traits are dominant in each
+cluster, providing biological meaning to the grouping.</p>
+<hr />
+</div>
+</div>
+<div id="step-11-productivity-graphs-by-event-and-growth-type"
+class="section level1">
+<h1>Step 11: Productivity Graphs by Event and Growth Type</h1>
+<p>In this final step, we integrate <strong>productivity data</strong>
+with the classification of cultivars by <strong>event type</strong> and
+<strong>growth type</strong>.<br />
+The goal is to visualize how the adoption of different technologies and
+plant architectures has evolved over time, and how this relates to
+soybean yield.</p>
+<hr />
+<div id="loading-productivity-data" class="section level2">
+<h2>Loading Productivity Data</h2>
+<p>We import the productivity dataset (<code>yield.xlsx</code>) and
+reload the main dataset (<code>data.xlsx</code>) to ensure
+consistency.</p>
+<pre class="r"><code>yield &lt;- read_excel(&quot;data/yield.xlsx&quot;)
+data &lt;- read_excel(&quot;data/data.xlsx&quot;)
+
+# Transform variables into factors
+yield$Year &lt;- as.factor(yield$Year)
+for (i in 1:ncol(data)) {
+  data[[i]] = as.factor(data[[i]])
+}</code></pre>
+<hr />
+</div>
+<div id="graph-1-productivity-by-event-type-over-time"
+class="section level2">
+<h2>Graph 1: Productivity by Event Type Over Time</h2>
+<p>We plot the <strong>number of cultivars per event type</strong>
+(bars) alongside the <strong>soybean yield</strong> (line +
+points).<br />
+This dual-axis plot allows us to compare the evolution of cultivar
+adoption with national productivity trends.</p>
+<pre class="r"><code>levels(data$Event) &lt;-
+  c(
+    &quot;Conventional&quot;,
+    &quot;CV127&quot;,
+    &quot;Intacta™ Roundup Ready™ 2 Pro&quot;,
+    &quot;Liberty Link&quot;,
+    &quot;Roundup Ready&quot;
+  )
+
+ggplot() +
+  geom_bar(data = data, aes(Year, fill = Event)) +
+  geom_point(data = yield,
+             aes(x = Year, y = (Yield * (175 / 125000))),
+             group = 1,
+             color = &quot;#a50026&quot;) +
+  geom_line(
+    data = yield,
+    aes(x = Year, y = Yield * (175 / 125000)),
+    group = 1,
+    color = &quot;#a50026&quot;
+  ) +
+  scale_y_continuous(
+    name = &quot;Count of cultivars&quot;,
+    sec.axis = sec_axis(~ . * 125000 / 175, name = &quot;Yield (Thousand Tons)&quot;)
+  ) +
+  theme_bw() +
+  xlab(&quot;Year&quot;) +
+  scale_fill_brewer(palette = &quot;Dark2&quot;) +
+  labs(fill = &quot;Event Type&quot;) +
+  theme(
+    legend.position = c(0.125, 0.85),
+    legend.background = element_rect(fill = &quot;white&quot;, colour = &quot;black&quot;)
+  )</code></pre>
+<p><img src="figure/script.Rmd/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><em>Interpretation:</em><br />
+- Bars show how the number of cultivars of each <strong>event
+type</strong> changes over time.<br />
+- The red line shows soybean yield (in thousand tons).<br />
+- This allows us to see whether the adoption of certain technologies
+coincides with productivity gains.</p>
+<hr />
+</div>
+<div id="graph-2-productivity-by-growth-type-over-time"
+class="section level2">
+<h2>Graph 2: Productivity by Growth Type Over Time</h2>
+<p>We now analyze the distribution of cultivars by <strong>growth
+type</strong> (determined, undetermined, semi-determined) across
+years.</p>
+<pre class="r"><code>levels(data$Growth_type) &lt;- c(&quot;Determined&quot;,
+                              &quot;Undetermined&quot;,
+                              &quot;Semi-determined&quot;)
+
+data %&gt;%
+  filter(Growth_type != &quot;NA&quot;) %&gt;%
+  ggplot() +
+  geom_bar(aes(Year, fill = Growth_type)) +
+  theme_bw() +
+  xlab(&quot;Year&quot;) +
+  ylab(&quot;Count of cultivars&quot;) +
+  scale_fill_brewer(palette = &quot;Set1&quot;) +
+  labs(fill = &quot;Growth type&quot;) +
+  theme(
+    legend.position = c(0.125, 0.85),
+    legend.background = element_rect(fill = &quot;white&quot;, colour = &quot;black&quot;)
+  )</code></pre>
+<p><img src="figure/script.Rmd/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><em>Interpretation:</em><br />
+- This graph shows how the prevalence of different <strong>growth
+types</strong> has shifted over time.<br />
+- It helps identify whether certain plant architectures became dominant
+in specific periods, possibly linked to productivity improvements.</p>
+<hr />
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>With these final plots, we close the pipeline by connecting
+<strong>genetic diversity and trait distribution</strong> to
+<strong>agronomic performance (yield)</strong>.<br />
+This integrated view highlights how <strong>technological
+events</strong> and <strong>growth types</strong> have influenced
+soybean productivity trends in Brazil.</p>
+<p>The complete analysis provides insights into the genetic diversity
+among soybean cultivar maintainers and how this diversity relates to
+agronomic outcomes.</p>
+</div>
+<div id="step-12-conclusion" class="section level1">
+<h1>Step 12: Conclusion</h1>
+<p>In this final step, we summarize the main findings of the analysis
+and highlight how the different methods complement each other to provide
+a comprehensive view of genetic diversity among soybean cultivar
+maintainers.</p>
+<hr />
+<div id="key-insights" class="section level2">
+<h2>Key Insights</h2>
+<ol style="list-style-type: decimal">
+<li><strong>Data Preparation</strong>
+<ul>
+<li>Cleaning and factor transformation ensured that categorical
+descriptors were properly handled.<br />
+</li>
+<li>Removing maintainers with very few observations reduced noise and
+improved robustness.</li>
+</ul></li>
+<li><strong>Variable Selection (Random Forest)</strong>
+<ul>
+<li>Identified the most informative traits for distinguishing
+maintainers.<br />
+</li>
+<li>Less relevant traits were excluded, simplifying the dataset without
+losing explanatory power.</li>
+</ul></li>
+<li><strong>Dimensionality Reduction (MCA)</strong>
+<ul>
+<li>Reduced the complexity of categorical data into a smaller number of
+dimensions.<br />
+</li>
+<li>Allowed visualization of patterns of variation and relationships
+between traits and maintainers.</li>
+</ul></li>
+<li><strong>Clustering (SOM)</strong>
+<ul>
+<li>Grouped maintainers into clusters based on trait similarity.<br />
+</li>
+<li>The SOM grid provided a clear, interpretable 2D representation of
+genetic diversity.<br />
+</li>
+<li>Distance maps and trait frequency plots revealed which descriptors
+were dominant in each cluster.</li>
+</ul></li>
+<li><strong>Productivity Trends</strong>
+<ul>
+<li>Linking event types and growth types to yield data showed how
+technological adoption and plant architecture influenced productivity
+over time.<br />
+</li>
+<li>The integration of genetic descriptors with agronomic performance
+provided a holistic view of cultivar evolution.</li>
+</ul></li>
+</ol>
+<hr />
+</div>
+<div id="final-remarks" class="section level2">
+<h2>Final Remarks</h2>
+<p>This pipeline demonstrates the power of combining <strong>machine
+learning (Random Forest)</strong>, <strong>multivariate statistics
+(MCA)</strong>, and <strong>unsupervised neural networks (SOM)</strong>
+in plant breeding research.<br />
+By integrating <strong>genetic descriptors</strong> with
+<strong>productivity data</strong>, we gain valuable insights into how
+cultivar maintainers interact, diversify, and adapt to technological and
+agronomic demands.</p>
+<p>The workflow is <strong>fully reproducible</strong> and can be
+adapted to other crops or datasets, serving as a template for future
+studies in genetic diversity and cultivar management.</p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.5.1 (2025-06-13 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26100)
+
+Matrix products: default
+  LAPACK version 3.12.1
+
+locale:
+[1] LC_COLLATE=Portuguese_Brazil.utf8  LC_CTYPE=Portuguese_Brazil.utf8   
+[3] LC_MONETARY=Portuguese_Brazil.utf8 LC_NUMERIC=C                      
+[5] LC_TIME=Portuguese_Brazil.utf8    
+
+time zone: America/Sao_Paulo
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] gridExtra_2.3        ggrepel_0.9.6        RColorBrewer_1.1-3  
+ [4] kohonen_3.0.12       ggforce_0.5.0        reshape2_1.4.4      
+ [7] magrittr_2.0.4       lubridate_1.9.4      forcats_1.0.0       
+[10] stringr_1.5.2        dplyr_1.1.4          purrr_1.1.0         
+[13] readr_2.1.5          tidyr_1.3.1          tibble_3.3.0        
+[16] tidyverse_2.0.0      randomForest_4.7-1.2 readxl_1.4.5        
+[19] factoextra_1.0.7     ggplot2_4.0.0        FactoMineR_2.12     
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.6         xfun_0.53            bslib_0.9.0         
+ [4] htmlwidgets_1.6.4    lattice_0.22-7       tzdb_0.5.0          
+ [7] vctrs_0.6.5          tools_4.5.1          generics_0.1.4      
+[10] cluster_2.1.8.1      pkgconfig_2.0.3      Matrix_1.7-3        
+[13] S7_0.2.0             scatterplot3d_0.3-44 lifecycle_1.0.4     
+[16] compiler_4.5.1       farver_2.1.2         git2r_0.36.2        
+[19] leaps_3.2            httpuv_1.6.16        htmltools_0.5.8.1   
+[22] sass_0.4.10          yaml_2.3.10          later_1.4.4         
+[25] pillar_1.11.1        jquerylib_0.1.4      MASS_7.3-65         
+[28] flashClust_1.01-2    DT_0.34.0            cachem_1.1.0        
+[31] nlme_3.1-168         tidyselect_1.2.1     digest_0.6.37       
+[34] mvtnorm_1.3-3        stringi_1.8.7        splines_4.5.1       
+[37] labeling_0.4.3       polyclip_1.10-7      rprojroot_2.1.1     
+[40] fastmap_1.2.0        grid_4.5.1           cli_3.6.5           
+[43] withr_3.0.2          scales_1.4.0         promises_1.3.3      
+[46] timechange_0.3.0     estimability_1.5.1   rmarkdown_2.29      
+[49] emmeans_1.11.2-8     workflowr_1.7.2      cellranger_1.1.0    
+[52] hms_1.1.3            evaluate_1.0.5       knitr_1.50          
+[55] mgcv_1.9-3           rlang_1.1.6          Rcpp_1.1.0          
+[58] xtable_1.8-4         glue_1.8.0           tweenr_2.0.3        
+[61] rstudioapi_0.17.1    jsonlite_2.0.0       plyr_1.8.9          
+[64] R6_2.6.1             fs_1.6.6             multcompView_0.1-10 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>Weverton Gomes da Costa, Doutorando, Pós-Graduação em
+Genética e Melhoramento - Universidade Federal de Viçosa, <a
+href="mailto:wevertonufv@gmail.com"
+class="email">wevertonufv@gmail.com</a><a href="#fnref1"
+class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

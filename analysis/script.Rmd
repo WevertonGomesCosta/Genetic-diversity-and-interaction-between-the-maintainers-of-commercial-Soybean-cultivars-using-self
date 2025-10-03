@@ -1,0 +1,768 @@
+---
+title: "Genetic diversity and interaction between the maintainers of commercial Soybean cultivars using self-organizing maps"
+author: 
+  - Costa, W. G.^[Weverton Gomes da Costa, Doutorando, Pós-Graduação em Genética e Melhoramento - Universidade Federal de Viçosa, wevertonufv@gmail.com]
+date: "`r Sys.Date()`"
+site: workflowr::wflow_site
+url: https://wevertongomescosta.github.io/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self/
+output:
+  workflowr::wflow_html:
+    toc: FALSE
+highlight: github
+editor_options:
+  chunk_output_type: console
+github-repo: WevertonGomesCosta/Genetic-diversity-and-interaction-between-the-maintainers-of-commercial-Soybean-cultivars-using-self
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  out.width = "100%",   # garante que todas as figuras usem 100% da largura
+  fig.align = "center"  # centraliza as figuras na página
+)
+```
+
+# Introduction
+
+This script performs an analysis of genetic diversity and interaction among maintainers of commercial soybean cultivars using selfing. The analysis involves several steps, including data preprocessing, variable selection using Random Forest, dimensionality reduction with Multiple Correspondence Analysis (MCA), and clustering with Self-Organizing Maps (SOM). The results are visualized through various plots to interpret the patterns of diversity and trait distributions.
+
+This document presents the main steps of the analysis described in the article:
+
+**Costa, W.G., et al. (2025). Genetic diversity and interaction between the maintainers of commercial Soybean cultivars using selfing. *Crop Science*.**  
+DOI: [10.1002/csc2.20816](https://doi.org/10.1002/csc2.20816)
+
+We will go through the following stages:
+
+1. **Data preparation**  
+2. **Variable selection with Random Forest**  
+3. **Dimensionality reduction with MCA**  
+4. **Clustering with Self-Organizing Maps (SOM)**  
+5. **Visualization of diversity and trait distributions**
+
+---
+
+# Step 1: Loading Libraries
+
+We start by loading the main R packages used in the analysis.
+
+```{r message=FALSE, warning=FALSE}
+library("FactoMineR")     # Métodos de análise multivariada, incluindo MCA (Multiple Correspondence Analysis)
+library("factoextra")     # Funções para visualização elegante de resultados de análises multivariadas (PCA, MCA, clustering)
+library(readxl)           # Importação de arquivos Excel (.xlsx), onde estão armazenados os dados brutos
+library(randomForest)     # Implementação do algoritmo Random Forest para seleção de variáveis e análise de importância
+library(tidyverse)        # Conjunto de pacotes (dplyr, ggplot2, tidyr, etc.) para manipulação e visualização de dados
+require(magrittr)         # Operador pipe (%>%) e funções auxiliares para tornar o código mais legível
+require(reshape2)         # Funções para reorganizar dados (melt, cast), úteis em gráficos e análises
+library(ggforce)          # Extensões do ggplot2 para gráficos avançados (arcos, diagramas, formas geométricas)
+library("kohonen")        # Implementação de Mapas Auto-Organizáveis (Self-Organizing Maps - SOM) para clustering
+library(RColorBrewer)     # Paletas de cores pré-definidas para melhorar a estética dos gráficos
+require("ggrepel")        # Rótulos de texto em gráficos ggplot2 que evitam sobreposição (geom_text_repel)
+library(gridExtra)        # Combinação e organização de múltiplos gráficos em uma mesma página/figura
+```
+
+# Step 2: Defining Colors
+
+We define a qualitative color palette using **RColorBrewer**.  
+These palettes are especially useful for categorical data, ensuring that groups (e.g., maintainers or trait categories) are visually distinct in the plots.
+
+```{r}
+qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual', ]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+```
+
+# Step 3: Reading the Data
+
+We import the dataset containing information about soybean cultivar maintainers and their morphological descriptors.  
+The data is stored in an Excel file (`data.xlsx`).
+
+```{r}
+data <- read_excel("data/data.xlsx")
+```
+
+# Step 4: Data Cleaning
+
+To ensure robust analysis, we remove maintainers with very few observations (≤ 5).  
+Small sample sizes can introduce noise and bias in clustering and multivariate methods, so filtering them out improves the reliability of the results.
+
+```{r}
+lower5 <- data %>%
+  group_by(Maintainer_coded) %>%
+  count() %>%
+  filter(n <= 5)
+
+data <- data[!data$Maintainer_coded %in% lower5$Maintainer_coded, ]
+```
+
+# Step 5: Transforming Variables into Factors
+
+Most of the descriptors in the dataset are **categorical traits** (e.g., seed color, growth type, pubescence density).  
+To ensure that statistical methods such as **Random Forest** and **Multiple Correspondence Analysis (MCA)** handle them correctly, we convert all variables into factors.
+
+```{r}
+for (i in 1:ncol(data)) {
+  data[[i]] = as.factor(data[[i]])
+}
+```
+
+*Explanation:*  
+By converting all columns into factors, we guarantee that categorical variables are treated as qualitative data rather than numeric codes. This step is essential for analyses that rely on the categorical nature of traits, such as MCA, which is designed specifically for factor variables.
+
+---
+
+# Step 6: Variable Selection with Random Forest
+
+In this step, we apply the **Random Forest** algorithm to identify which traits are most important for distinguishing soybean cultivar maintainers.  
+Random Forest is an ensemble method that builds multiple decision trees and aggregates their results, providing both classification accuracy and a measure of variable importance.
+
+- **Goal:** Reduce dimensionality by focusing on the most informative traits.  
+- **Output:** A ranking of traits based on their contribution to classification accuracy and node purity (Gini index).
+
+```{r}
+set.seed(123) # Ensures reproducibility
+
+# Excluding Name, Maintainer and Year variables (not used in the analysis)
+data = data[, -c(1, 2, 5)] 
+
+ntraits <- (ncol(data) - 1) / 3 # Number of traits divided by 3
+ntree <- 500 # Number of trees
+
+# Fit Random Forest model
+rf_model <- randomForest(
+  data$Maintainer_coded ~ .,
+  data = data,
+  mtry = ntraits,
+  importance = TRUE,
+  proximity = TRUE,
+  ntree = ntree,
+  na.action = na.roughfix
+)
+```
+
+*Explanation:*  
+The Random Forest model provides two importance measures:  
+- **Accuracy**: how much classification accuracy decreases if the variable is removed.  
+- **Gini Index**: how much the variable contributes to node purity in decision trees.  
+
+---
+
+## Importance of traits based on Accuracy and Gini Index
+
+```{r}
+imp <- as.data.frame(varImpPlot(rf_model))
+imp$traitnames <- rownames(imp)
+imp_trait <- melt(imp, id.var = "traitnames")
+imp_trait$traitnames <- as.factor(imp_trait$traitnames)
+levels(imp_trait$traitnames) <- c(
+  "Event Type",
+  "Flower Color",
+  "Growth Type",
+  "Hilo Color",
+  "Hypocotyl",
+  "Legum Color",
+  "Peroxidase Reaction",
+  "Pubescence Color",
+  "Pubescence Density",
+  "Seed Brightness",
+  "Seed Shape",
+  "Tegument Color"
+)
+```
+
+### Plot importance of traits
+
+```{r}
+imp_trait %>%
+  mutate(traitnames = fct_reorder(traitnames, value)) %>%
+  ggplot(aes(x = traitnames, y = value)) +
+  geom_point(aes(colour = variable, shape = variable), size = 4) +
+  scale_colour_discrete(labels = c("Accuracy", "Gini Index")) +
+  scale_shape_discrete(labels = c("Accuracy", "Gini Index")) +
+  geom_segment(aes(
+    x = traitnames,
+    xend = traitnames,
+    y = 0,
+    yend = value
+  )) +
+  ylab("Increase in node purity") +
+  xlab("") +
+  theme_minimal() +
+  theme(
+    legend.position = c(0.8, 0.15),
+    legend.title = element_blank(),
+    legend.background = element_rect(fill = "white", colour = "black"),
+    legend.key.size = unit(0.5, "cm"),
+    axis.text.y = element_text(angle = 15, vjust = 0.5, hjust = 1)
+  ) +
+  coord_flip()
+```
+
+---
+
+## Excluding the 4 least important traits
+
+To simplify the dataset and reduce noise, we exclude the four traits with the lowest importance scores.
+
+```{r}
+x <- imp_trait %>%
+  group_by(traitnames) %>%
+  summarise(value = mean(value)) %>%
+  slice_min(value, n = 4, with_ties = FALSE) %>%
+  ungroup()
+
+colnames(data) <- c(
+  "Maintainer_coded",
+  "Event Type",
+  "Flower Color",
+  "Legum Color",
+  "Seed Shape",
+  "Tegument Color",
+  "Hypocotyl",
+  "Pubescence Color",
+  "Pubescence Density",
+  "Hilo Color",
+  "Peroxidase Reaction",
+  "Growth Type",
+  "Seed Brightness"
+)
+
+# Remove the least important traits
+data <- data %>% select(!any_of(x$traitnames))
+```
+
+# Step 7: Multiple Correspondence Analysis (MCA)
+
+In this step, we apply **Multiple Correspondence Analysis (MCA)** to reduce the dimensionality of the categorical dataset.  
+MCA is particularly suitable for analyzing relationships between categorical variables, allowing us to summarize the information into a smaller number of dimensions while preserving as much variance as possible.
+
+---
+
+## Running MCA
+
+We run MCA on the dataset, treating the first column (`Maintainer_coded`) as a supplementary qualitative variable (not used to build the axes but projected afterwards).
+
+```{r}
+res.mca <- MCA(
+  data,
+  quali.sup = 1,   # Maintainer_coded as supplementary variable
+  graph = FALSE,   # Suppress automatic plots
+  ncp = 54         # Number of dimensions to compute
+)
+```
+
+---
+
+## Eigenvalues
+
+The eigenvalues represent the amount of variance explained by each dimension.  
+By examining them, we can decide how many dimensions are relevant for interpretation.
+
+```{r}
+eig.val <- get_eigenvalue(res.mca)
+eig.val
+
+# Convert to data frame for plotting
+eig.val <- as.data.frame(eig.val)
+eig.val$Dimension <- as.numeric(str_replace(rownames(eig.val), "Dim.", ""))
+```
+
+---
+
+## Cumulative Variance Explained
+
+We plot the cumulative variance explained by the dimensions.  
+This helps us identify the number of dimensions that capture most of the variability in the data.
+
+```{r}
+ggplot(data = eig.val, aes(x = Dimension, y = cumulative.variance.percent)) +
+  geom_bar(stat = "identity", fill = "#00AFBB", alpha = 0.5) +
+  geom_point(colour = "#FC4E07") +
+  geom_line(colour = "#FC4E07") +
+  scale_x_continuous(breaks = c(1:nrow(eig.val)), expand = c(0.01, 0)) +
+  scale_y_continuous(expand = expansion(mult = c(0, .05))) +
+  theme_bw() +
+  labs(
+    x = "Dimensions",
+    y = "Cumulative variance percent"
+  )
+```
+
+*Interpretation:*  
+- The first few dimensions usually explain the majority of the variance.  
+- We will focus on these dimensions in the next steps (clustering with SOM), as they capture the most relevant patterns of diversity among maintainers.
+
+---
+
+# Step 8: Clustering with Self-Organizing Maps (SOM)
+
+In this step, we use **Kohonen’s Self-Organizing Maps (SOM)** to group soybean cultivar maintainers based on their coordinates obtained from the MCA.  
+SOM is an **unsupervised neural network** that projects high-dimensional data into a two-dimensional grid, preserving the topological relationships between observations.  
+This allows us to identify clusters of maintainers with similar genetic profiles.
+
+---
+
+## Defining the SOM Grid
+
+We first define the **network topology** (grid) and parameters for training the SOM.
+
+- `map_dimension = 4`: creates a 4x4 hexagonal grid (16 neurons).  
+- `n_iterations = 2000`: number of training iterations.  
+- `topo = "hexagonal"`: hexagonal topology ensures smoother neighborhood relations.  
+- `toroidal = FALSE`: edges of the grid are not connected.
+
+```{r}
+# Network topology and parameters
+map_dimension = 4
+n_iterations = 2000
+
+# Define SOM grid
+som_grid = kohonen::somgrid(
+  xdim = map_dimension,
+  ydim = map_dimension,
+  topo = "hexagonal",
+  toroidal = FALSE
+)
+
+# Coordinates of maintainers in the MCA space (54 dimensions)
+b <- res.mca[["quali.sup"]][["coord"]]
+```
+
+---
+
+## Training the SOM
+
+We now train the SOM using the MCA coordinates as input.  
+The data is scaled to ensure all dimensions contribute equally to the distance calculations.
+
+- `rlen = n_iterations`: number of iterations.  
+- `alpha = c(0.05, 0.01)`: learning rate schedule (starts at 0.05 and decreases to 0.01).  
+- `dist.fcts = 'euclidean'`: Euclidean distance is used to measure similarity.
+
+```{r}
+set.seed(123) # Ensures reproducibility
+
+m = kohonen::supersom(
+  scale(b),          # Input data (scaled MCA coordinates)
+  grid = som_grid,   # SOM grid defined above
+  rlen = n_iterations,
+  alpha = c(0.05, 0.01),
+  dist.fcts = 'euclidean'
+)
+```
+
+*Interpretation:*  
+The trained SOM organizes maintainers into clusters on the 2D grid.  
+- Each hexagon (neuron) represents a group of maintainers with similar trait profiles.  
+- Neighboring hexagons contain maintainers that are more similar to each other.  
+- This clustering will be visualized in the next steps to interpret diversity and interaction patterns.
+
+# Step 9: Visualizing the SOM Results
+
+After training the Self-Organizing Map (SOM), we now explore its outputs through different visualizations.  
+These plots help us evaluate the quality of the training, the stability of the clusters, and the relationships between neighboring neurons.
+
+---
+
+## Interaction Graph
+
+The **interaction graph** shows how the average distance to the closest unit decreases during training.  
+A smooth decline indicates that the SOM is converging and stabilizing.
+
+```{r}
+progress <- as.data.frame(cbind(m$changes, 1:nrow(m$changes)))
+colnames(progress) <- c("Mean distance to closest unit", "Iteration")
+
+ggplot(progress, aes(Iteration, `Mean distance to closest unit`)) +
+  geom_line(color = "#00AFBB", linewidth  = 1) +
+  stat_smooth(color = "#FC4E07",
+              fill = "#FC4E07",
+              method = "loess") +
+  theme_minimal() +
+  labs(y = colnames(progress[1]))
+```
+
+*Interpretation:*  
+- The curve should decrease as iterations progress.  
+- A plateau indicates that the SOM has reached stability.
+
+---
+
+## Trait Frequency
+
+We assign each maintainer to a SOM unit (cluster) and merge this classification back into the dataset.  
+This allows us to analyze the frequency of traits within each cluster.
+
+```{r}
+grouping <- as_tibble(cbind(m$unit.classif, rownames(b)))
+colnames(grouping) <- c("group", "Maintainer_coded")
+grouping$group <- as.factor(grouping$group)
+grouping$Maintainer_coded <- as.factor(grouping$Maintainer_coded)
+
+# Merge cluster assignment into the dataset
+data <- data %>% left_join(grouping)
+```
+
+*Interpretation:*  
+Each maintainer is now associated with a cluster (group), enabling trait distribution analysis across clusters.
+
+---
+
+## Distance Graph Between Neighboring Neurons
+
+This visualization shows the **average distance between neighboring neurons** in the SOM grid.  
+It highlights regions of the map where clusters are more distinct (larger distances) or more similar (smaller distances).
+
+```{r}
+som_coord <- m[[4]]$pts %>%
+  as_tibble %>%
+  mutate(group = as.integer(row_number()))
+
+som_pts <- tibble(group = as.integer(m[[2]]),
+                  dist = m[[3]])
+
+ndist <- unit.distances(m$grid)
+cddist <- as.matrix(object.distances(m, type = "codes"))
+cddist[abs(ndist - 1) > .001] <- NA
+neigh.dists <- colMeans(cddist, na.rm = TRUE)
+som_coord <- som_coord %>% mutate(dist = neigh.dists)
+
+neigdists <- som_coord %>%
+  ggplot(aes(x0 = x, y0 = y)) +
+  geom_regon(aes(
+    r = 0.5,
+    angle = 11,
+    sides = 6,
+    fill = dist
+  ),
+  expand = unit(0.1, 'cm')) +
+  scale_fill_gradient(low = "red", high = "yellow", name = "Distance") +
+  theme(
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "bottom"
+  ) +
+  geom_text_repel(
+    data = som_coord,
+    aes(x = x, y = y, label = group),
+    hjust        = 0.5,
+    force = 0,
+    color = "black",
+    show.legend = FALSE,
+    segment.color = NA
+  )
+
+neigdists
+```
+
+*Interpretation:*  
+- **Red areas** indicate neurons that are more distinct from their neighbors (potential cluster boundaries).  
+- **Yellow areas** indicate neurons that are more similar to their neighbors (homogeneous regions).  
+- The labels show the neuron (cluster) IDs.
+
+---
+
+# Step 10: Distribution of Maintainers and Traits in SOM Clusters
+
+After training and validating the SOM, we now visualize how **maintainers** and their **traits** are distributed across the clusters.  
+This step is crucial to interpret the biological meaning of the clusters and to identify which characteristics are most associated with each group.
+
+---
+
+## Graph: Distribution of Maintainers in Clusters
+
+This plot shows the position of each maintainer in the SOM grid.  
+Each hexagon represents a neuron (cluster), and labels indicate the maintainers assigned to that cluster.
+
+```{r graph-maintainers, message=FALSE, warning=FALSE}
+p <- som_coord %>%
+  ggplot(aes(x0 = x, y0 = y)) +
+  geom_regon(aes(
+    r = 0.5,
+    angle = 11,
+    sides = 6,
+    fill = factor(group)
+  ),
+  expand = unit(0.1, 'cm')) +
+  theme(
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "none"
+  ) +
+  scale_fill_manual(values = col_vector[40:56])
+
+plotdata <- data %>%
+  group_by(group, Maintainer_coded) %>%
+  summarize(n = n()) %>%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %>%
+  ungroup()
+
+plotdata$group <- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata <- plotdata %>% left_join(som_coord, by = "group")
+plotdata <- na.omit(plotdata)
+
+MC <- p +
+  geom_label_repel(
+    data = plotdata,
+    aes(x = x, y = y, label = Maintainer_coded),
+    max.overlaps = Inf,
+    box.padding = 0.1,
+    hjust        = 0.5,
+    direction    = "y",
+    color = "black",
+    show.legend = FALSE,
+    segment.color = NA
+  ) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = "black",
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank())
+MC
+```
+
+*Interpretation:*  
+- Each maintainer is placed in a cluster (hexagon).  
+- Clusters with multiple maintainers indicate groups with similar genetic profiles.  
+
+---
+
+## Graphs: Distribution of Trait Categories by Cluster
+
+We now visualize how **trait categories** (e.g., Event Type, Legum Color, Seed Shape, Hypocotyl, Pubescence Color, Hilo Color, Growth Type, Seed Brightness) are distributed across clusters.  
+Each cluster is represented by a **pie chart**, showing the proportion of each trait category within that cluster.
+
+Example: **Event Type**
+
+```{r graph-event, message=FALSE, warning=FALSE}
+p <- som_coord %>%
+  ggplot(aes(x0 = x, y0 = y)) +
+  geom_regon(
+    aes(r = 0.5, angle = 11, sides = 6),
+    expand = unit(0.1, 'cm'),
+    alpha = 0,
+    color = "black"
+  ) +
+  theme(
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "bottom"
+  )
+
+plotdata <- data %>%
+  group_by(group, `Event Type`) %>%
+  summarize(n = n()) %>%
+  mutate(pct = (n / sum(n)),
+         lbl = scales::percent(pct)) %>%
+  ungroup()
+
+plotdata$group <- as.integer(levels(plotdata$group))[plotdata$group]
+plotdata <- plotdata %>% left_join(som_coord, by = "group")
+plotdata <- na.omit(plotdata)
+levels(plotdata$`Event Type`) <-
+  c(
+    "Conventional",
+    "CV127",
+    "Intacta™ Roundup Ready™ 2 Pro",
+    "Liberty Link",
+    "Roundup Ready"
+  )
+
+EV <- p +
+  geom_arc_bar(
+    data = plotdata,
+    aes(
+      x0 = x,
+      y0 = y,
+      r0 = 0,
+      r = 0.4,
+      amount = n,
+      fill = `Event Type`
+    ),
+    stat = 'pie',
+    alpha = 0.8
+  ) +
+  scale_fill_manual(values = col_vector[1:5]) +
+  geom_text(
+    data = plotdata,
+    aes(
+      x = x,
+      y = (y - 0.45),
+      label = group
+    ),
+    color = "black",
+    show.legend = FALSE
+  ) +
+  theme(plot.title = element_blank(), legend.title = element_blank())
+EV
+```
+
+*Interpretation:*  
+- Each cluster shows the proportion of cultivars belonging to different **event types**.  
+- Similar plots can be generated for **Legum Color, Seed Shape, Hypocotyl, Pubescence Color, Hilo Color, Growth Type, and Seed Brightness** (as in your code).  
+- These visualizations help identify which traits are dominant in each cluster, providing biological meaning to the grouping.
+
+---
+
+# Step 11: Productivity Graphs by Event and Growth Type
+
+In this final step, we integrate **productivity data** with the classification of cultivars by **event type** and **growth type**.  
+The goal is to visualize how the adoption of different technologies and plant architectures has evolved over time, and how this relates to soybean yield.
+
+---
+
+## Loading Productivity Data
+
+We import the productivity dataset (`yield.xlsx`) and reload the main dataset (`data.xlsx`) to ensure consistency.
+
+```{r}
+yield <- read_excel("data/yield.xlsx")
+data <- read_excel("data/data.xlsx")
+
+# Transform variables into factors
+yield$Year <- as.factor(yield$Year)
+for (i in 1:ncol(data)) {
+  data[[i]] = as.factor(data[[i]])
+}
+```
+
+---
+
+## Graph 1: Productivity by Event Type Over Time
+
+We plot the **number of cultivars per event type** (bars) alongside the **soybean yield** (line + points).  
+This dual-axis plot allows us to compare the evolution of cultivar adoption with national productivity trends.
+
+```{r}
+levels(data$Event) <-
+  c(
+    "Conventional",
+    "CV127",
+    "Intacta™ Roundup Ready™ 2 Pro",
+    "Liberty Link",
+    "Roundup Ready"
+  )
+
+ggplot() +
+  geom_bar(data = data, aes(Year, fill = Event)) +
+  geom_point(data = yield,
+             aes(x = Year, y = (Yield * (175 / 125000))),
+             group = 1,
+             color = "#a50026") +
+  geom_line(
+    data = yield,
+    aes(x = Year, y = Yield * (175 / 125000)),
+    group = 1,
+    color = "#a50026"
+  ) +
+  scale_y_continuous(
+    name = "Count of cultivars",
+    sec.axis = sec_axis(~ . * 125000 / 175, name = "Yield (Thousand Tons)")
+  ) +
+  theme_bw() +
+  xlab("Year") +
+  scale_fill_brewer(palette = "Dark2") +
+  labs(fill = "Event Type") +
+  theme(
+    legend.position = c(0.125, 0.85),
+    legend.background = element_rect(fill = "white", colour = "black")
+  )
+```
+
+*Interpretation:*  
+- Bars show how the number of cultivars of each **event type** changes over time.  
+- The red line shows soybean yield (in thousand tons).  
+- This allows us to see whether the adoption of certain technologies coincides with productivity gains.
+
+---
+
+## Graph 2: Productivity by Growth Type Over Time
+
+We now analyze the distribution of cultivars by **growth type** (determined, undetermined, semi-determined) across years.
+
+```{r}
+levels(data$Growth_type) <- c("Determined",
+                              "Undetermined",
+                              "Semi-determined")
+
+data %>%
+  filter(Growth_type != "NA") %>%
+  ggplot() +
+  geom_bar(aes(Year, fill = Growth_type)) +
+  theme_bw() +
+  xlab("Year") +
+  ylab("Count of cultivars") +
+  scale_fill_brewer(palette = "Set1") +
+  labs(fill = "Growth type") +
+  theme(
+    legend.position = c(0.125, 0.85),
+    legend.background = element_rect(fill = "white", colour = "black")
+  )
+```
+
+*Interpretation:*  
+- This graph shows how the prevalence of different **growth types** has shifted over time.  
+- It helps identify whether certain plant architectures became dominant in specific periods, possibly linked to productivity improvements.
+
+---
+
+# Conclusion
+
+With these final plots, we close the pipeline by connecting **genetic diversity and trait distribution** to **agronomic performance (yield)**.  
+This integrated view highlights how **technological events** and **growth types** have influenced soybean productivity trends in Brazil.
+
+The complete analysis provides insights into the genetic diversity among soybean cultivar maintainers and how this diversity relates to agronomic outcomes.
+
+# Step 12: Conclusion
+
+In this final step, we summarize the main findings of the analysis and highlight how the different methods complement each other to provide a comprehensive view of genetic diversity among soybean cultivar maintainers.
+
+---
+
+## Key Insights
+
+1. **Data Preparation**  
+   - Cleaning and factor transformation ensured that categorical descriptors were properly handled.  
+   - Removing maintainers with very few observations reduced noise and improved robustness.
+
+2. **Variable Selection (Random Forest)**  
+   - Identified the most informative traits for distinguishing maintainers.  
+   - Less relevant traits were excluded, simplifying the dataset without losing explanatory power.
+
+3. **Dimensionality Reduction (MCA)**  
+   - Reduced the complexity of categorical data into a smaller number of dimensions.  
+   - Allowed visualization of patterns of variation and relationships between traits and maintainers.
+
+4. **Clustering (SOM)**  
+   - Grouped maintainers into clusters based on trait similarity.  
+   - The SOM grid provided a clear, interpretable 2D representation of genetic diversity.  
+   - Distance maps and trait frequency plots revealed which descriptors were dominant in each cluster.
+
+5. **Productivity Trends**  
+   - Linking event types and growth types to yield data showed how technological adoption and plant architecture influenced productivity over time.  
+   - The integration of genetic descriptors with agronomic performance provided a holistic view of cultivar evolution.
+
+---
+
+## Final Remarks
+
+This pipeline demonstrates the power of combining **machine learning (Random Forest)**, **multivariate statistics (MCA)**, and **unsupervised neural networks (SOM)** in plant breeding research.  
+By integrating **genetic descriptors** with **productivity data**, we gain valuable insights into how cultivar maintainers interact, diversify, and adapt to technological and agronomic demands.
+
+The workflow is **fully reproducible** and can be adapted to other crops or datasets, serving as a template for future studies in genetic diversity and cultivar management.
