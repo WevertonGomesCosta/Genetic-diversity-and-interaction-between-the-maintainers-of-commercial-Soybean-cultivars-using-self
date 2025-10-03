@@ -1,5 +1,12 @@
 # Genetic Diversity and Interaction Between the Maintainers of Commercial Soybean Cultivars Using Self-Organizing Maps
 
+[![DOI](https://zenodo.org/badge/DOI/10.1002/csc2.20816.svg)](https://doi.org/10.1002/csc2.20816)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wevertoncosta/)
+[![ORCID](https://img.shields.io/badge/ORCID-0000--0003--0742--5936-green?style=flat&logo=orcid&logoColor=white)](https://orcid.org/0000-0003-0742-5936)
+[![Lattes](https://img.shields.io/badge/Lattes-CNPq-blue)](http://lattes.cnpq.br/2723811288754046)
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat&logo=github)](https://github.com/WevertonGomesCosta)
+[![Google Scholar](https://img.shields.io/badge/Google%20Scholar-Profile-4285F4?style=flat&logo=google-scholar&logoColor=white)](https://scholar.google.com.br/citations?hl=pt-BR&user=eJNKcHsAAAAJ)
+
 Este repositório contém o código e a documentação do pipeline de análise de diversidade genética e interação entre mantenedores de cultivares comerciais de soja, utilizando **Random Forest**, **Análise de Correspondência Múltipla (MCA)** e **Mapas Auto-Organizáveis de Kohonen (SOM)**.
 
 ---
