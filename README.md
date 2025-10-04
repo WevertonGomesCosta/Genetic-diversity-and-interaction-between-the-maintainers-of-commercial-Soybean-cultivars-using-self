@@ -85,9 +85,7 @@ Este repositório contém o código e a documentação do pipeline de análise d
 
 ## 📜 Licença
 
-Este projeto é distribuído sob a licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
-
-Perfeito, Weverton! Aqui está a versão em **inglês** do seu `README.md`, estruturada de forma clara e profissional para o GitHub:
+Este projeto é distribuído sob a licença **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License**. Consulte o arquivo `LICENSE` para mais detalhes.
 
 --- 
 
@@ -171,4 +169,4 @@ This repository contains the code and documentation for the pipeline analyzing *
 
 ## 📜 License
 
-This project is distributed under is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License**. See the `LICENSE` file for details.
+This project is distributed and licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License**. See the `LICENSE` file for details.
